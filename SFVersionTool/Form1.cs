@@ -24,6 +24,7 @@ namespace SFVersionTool
         private string _applicationTypeVersion;
         private int _choosedActorCount;
 
+        private Dictionary<string, List<string>> _actorVersions = new Dictionary<string, List<string>>();
         private List<ActorInfo> _updatedActorInfos = new List<ActorInfo>();
 
         public Form1()
@@ -63,13 +64,13 @@ namespace SFVersionTool
 
             lbl_ActorCount.Text = actorInfos.Keys.Count.ToString();
 
-            Dictionary<string, List<string>> actorVersions = new Dictionary<string, List<string>>();
+            _actorVersions = new Dictionary<string, List<string>>();
 
             List<ActorInfo> views = new List<ActorInfo>();
 
             // 应用程序版本号
             string mainPath = $"{_projectPath}\\ApplicationPackageRoot\\ApplicationManifest.xml";
-            txb_ApplicationTypeVersion.Text = GetApplicationTypeVersion(mainPath);
+            _applicationTypeVersion = txb_ApplicationTypeVersion.Text = GetApplicationTypeVersion(mainPath);
 
             foreach (KeyValuePair<string, string> keyValuePair in actorInfos)
             {
@@ -81,7 +82,7 @@ namespace SFVersionTool
                 string codeVersion = xml.SelectSingleNode("//*[local-name()='ServiceManifest']/*[local-name()='CodePackage']")?.Attributes?["Version"].Value;
                 string configVersion = xml.SelectSingleNode("//*[local-name()='ServiceManifest']/*[local-name()='ConfigPackage']")?.Attributes?["Version"].Value;
 
-                actorVersions.Add(keyValuePair.Key, new List<string> { pkgVersion, codeVersion, configVersion });
+                _actorVersions.Add(keyValuePair.Key, new List<string> { pkgVersion, codeVersion, configVersion });
 
                 views.Add(new ActorInfo
                 {
@@ -183,6 +184,12 @@ namespace SFVersionTool
         /// </summary>
         private void btn_Preview_Click(object sender, EventArgs e)
         {
+            //if (_applicationTypeVersion == txb_ApplicationTypeVersion.Text)
+            //{
+            //    MessageBox.Show(@"未修改应用程序版本号，无法预览", @"Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button3);
+            //    return;
+            //}
+
             List<ActorInfo> updatedActorInfos = new List<ActorInfo>();
 
             for (int i = 0; i < dataGridView1.RowCount; i++)
@@ -191,22 +198,42 @@ namespace SFVersionTool
                 bool flag = Convert.ToBoolean(checkBoxCell.Value);
                 if (flag)
                 {
+                    for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                    {
+                        dataGridView1.Rows[i].Cells[j].Style.BackColor = Color.LightSkyBlue;
+                    }
+
                     if (chb_PkgVersion.Checked)
                     {
                         dataGridView1.Rows[i].Cells["NextPkgVersion"].Value = txb_ApplicationTypeVersion.Text;
-                        dataGridView1.Rows[i].Cells["NextPkgVersion"].Style.ForeColor = Color.Crimson;
+                        dataGridView1.Rows[i].Cells["NextPkgVersion"].Style.ForeColor = Color.Red;
+                    }
+                    else
+                    {
+                        dataGridView1.Rows[i].Cells["NextPkgVersion"].Value = _actorVersions[dataGridView1.Rows[i].Cells["ActorName"].Value.ToString()][0];
+                        dataGridView1.Rows[i].Cells["NextPkgVersion"].Style.ForeColor = DefaultForeColor;
                     }
 
                     if (chb_CodeVersion.Checked)
                     {
                         dataGridView1.Rows[i].Cells["NextCodeVersion"].Value = txb_ApplicationTypeVersion.Text;
-                        dataGridView1.Rows[i].Cells["NextCodeVersion"].Style.ForeColor = Color.Crimson;
+                        dataGridView1.Rows[i].Cells["NextCodeVersion"].Style.ForeColor = Color.Red;
+                    }
+                    else
+                    {
+                        dataGridView1.Rows[i].Cells["NextCodeVersion"].Value = _actorVersions[dataGridView1.Rows[i].Cells["ActorName"].Value.ToString()][1];
+                        dataGridView1.Rows[i].Cells["NextCodeVersion"].Style.ForeColor = DefaultForeColor;
                     }
 
                     if (chb_ConfigVersion.Checked)
                     {
                         dataGridView1.Rows[i].Cells["NextConfigVersion"].Value = txb_ApplicationTypeVersion.Text;
-                        dataGridView1.Rows[i].Cells["NextConfigVersion"].Style.ForeColor = Color.Crimson;
+                        dataGridView1.Rows[i].Cells["NextConfigVersion"].Style.ForeColor = Color.Red;
+                    }
+                    else
+                    {
+                        dataGridView1.Rows[i].Cells["NextConfigVersion"].Value = _actorVersions[dataGridView1.Rows[i].Cells["ActorName"].Value.ToString()][2];
+                        dataGridView1.Rows[i].Cells["NextConfigVersion"].Style.ForeColor = DefaultForeColor;
                     }
 
                     ActorInfo actorInfo = new ActorInfo
@@ -229,45 +256,13 @@ namespace SFVersionTool
         }
 
         /// <summary>
-        ///     单选
-        /// </summary>
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == 0 && e.RowIndex != -1)
-            {
-                DataGridViewCheckBoxCell checkBoxCell = (DataGridViewCheckBoxCell)dataGridView1.Rows[e.RowIndex].Cells["check"];
-                bool flag = Convert.ToBoolean(checkBoxCell.Value);
-                checkBoxCell.Value = !flag;
-
-                if (!flag)
-                {
-                    _choosedActorCount++;
-                }
-                else
-                {
-                    _choosedActorCount--;
-                }
-
-                lbl_ChoosedActorCount.Text = _choosedActorCount.ToString();
-            }
-        }
-
-        /// <summary>
         ///     保存
         /// </summary>
         private void btn_Save_Click(object sender, EventArgs e)
         {
-            //Test();
-
-            if (_applicationTypeVersion == null)
-            {
-                MessageBox.Show(@"请先预览后再保存", @"Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button3);
-                return;
-            }
-
             if (_updatedActorInfos == null || _updatedActorInfos.Count == 0)
             {
-                MessageBox.Show(@"未检测到任何修改", @"Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button3);
+                MessageBox.Show(@"请先预览后再保存", @"Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button3);
                 return;
             }
 
@@ -309,6 +304,40 @@ namespace SFVersionTool
         }
 
         /// <summary>
+        ///     单选
+        /// </summary>
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 0 && e.RowIndex != -1)
+            {
+                DataGridViewCheckBoxCell checkBoxCell = (DataGridViewCheckBoxCell)dataGridView1.Rows[e.RowIndex].Cells["check"];
+                bool flag = Convert.ToBoolean(checkBoxCell.Value);
+                checkBoxCell.Value = !flag;
+
+                if (!flag)
+                {
+                    _choosedActorCount++;
+
+                    for (int j = 0; j < dataGridView1.Rows[e.RowIndex].Cells.Count; j++)
+                    {
+                        dataGridView1.Rows[e.RowIndex].Cells[j].Style.BackColor = Color.LightSkyBlue;
+                    }
+                }
+                else
+                {
+                    _choosedActorCount--;
+
+                    for (int j = 0; j < dataGridView1.Rows[e.RowIndex].Cells.Count; j++)
+                    {
+                        dataGridView1.Rows[e.RowIndex].Cells[j].Style.BackColor = DefaultBackColor;
+                    }
+                }
+
+                lbl_ChoosedActorCount.Text = _choosedActorCount.ToString();
+            }
+        }
+
+        /// <summary>
         ///     全选
         /// </summary>
         private void chb_chooseAll_MouseClick(object sender, MouseEventArgs e)
@@ -322,14 +351,45 @@ namespace SFVersionTool
                 if (flag)
                 {
                     _choosedActorCount = Convert.ToInt32(lbl_ActorCount.Text);
-                    lbl_ChoosedActorCount.Text = _choosedActorCount.ToString();
+
+                    dataGridView1.DefaultCellStyle.BackColor = Color.LightSkyBlue;
                 }
                 else
                 {
                     _choosedActorCount = 0;
-                    lbl_ChoosedActorCount.Text = _choosedActorCount.ToString();
+
+                    dataGridView1.DefaultCellStyle.BackColor = DefaultBackColor;
                 }
+
+                lbl_ChoosedActorCount.Text = _choosedActorCount.ToString();
             }
+        }
+
+        /// <summary>
+        ///     撤销
+        /// </summary>
+        private void btn_Cancel_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(_projectPath))
+            {
+                ResetForm();
+            }
+        }
+
+        private void btn_Refresh_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(_projectPath))
+            {
+                ResetForm();
+            }
+        }
+
+        private void ResetForm()
+        {
+            lbl_ChoosedActorCount.Text = "0";
+            chb_chooseAll.Checked = false;
+            _updatedActorInfos = new List<ActorInfo>();
+            InitDataGridView();
         }
     }
 }
