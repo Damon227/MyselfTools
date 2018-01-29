@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -102,6 +103,13 @@ namespace SFVersionTool
 
             dataGridView1.Columns.Insert(0, checkBoxColumn);
             dataGridView1.DataSource = views;
+
+            Type type = dataGridView1.GetType();
+            PropertyInfo pi = type.GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
+            if (pi != null)
+            {
+                pi.SetValue(dataGridView1, true, null);
+            }
 
             dataGridView1.Columns[0].Width = 50; // 选择框列
             dataGridView1.Columns[1].Width = 500;
@@ -300,6 +308,9 @@ namespace SFVersionTool
 
             xml.Save(mainPath);
 
+            _updatedActorInfos = null;
+            lbl_ChoosedActorCount.Text = "0";
+
             InitDataGridView();
         }
 
@@ -318,19 +329,13 @@ namespace SFVersionTool
                 {
                     _choosedActorCount++;
 
-                    for (int j = 0; j < dataGridView1.Rows[e.RowIndex].Cells.Count; j++)
-                    {
-                        dataGridView1.Rows[e.RowIndex].Cells[j].Style.BackColor = Color.LightSkyBlue;
-                    }
+                    dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightSkyBlue;
                 }
                 else
                 {
                     _choosedActorCount--;
 
-                    for (int j = 0; j < dataGridView1.Rows[e.RowIndex].Cells.Count; j++)
-                    {
-                        dataGridView1.Rows[e.RowIndex].Cells[j].Style.BackColor = DefaultBackColor;
-                    }
+                    dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = DefaultBackColor;
                 }
 
                 lbl_ChoosedActorCount.Text = _choosedActorCount.ToString();
@@ -352,13 +357,12 @@ namespace SFVersionTool
                 {
                     _choosedActorCount = Convert.ToInt32(lbl_ActorCount.Text);
 
-                    dataGridView1.DefaultCellStyle.BackColor = Color.LightSkyBlue;
+                    dataGridView1.Rows[i].DefaultCellStyle.BackColor = Color.LightSkyBlue;
                 }
                 else
                 {
                     _choosedActorCount = 0;
-
-                    dataGridView1.DefaultCellStyle.BackColor = DefaultBackColor;
+                    dataGridView1.Rows[i].DefaultCellStyle.BackColor = DefaultBackColor;
                 }
 
                 lbl_ChoosedActorCount.Text = _choosedActorCount.ToString();
