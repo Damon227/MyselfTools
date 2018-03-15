@@ -16,7 +16,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFVersionTool", "SFVersionT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExcelConsole", "ExcelConsole\ExcelConsole.csproj", "{50D84A35-7326-4262-9DE6-A09637F8AD62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "TestConsole\TestConsole.csproj", "{494CFC48-6D4F-4E0E-9045-977920FF8CBA}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{11E2DD7E-C2CC-47DA-A378-F85BAD2D1378}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCoreTest", "EFCoreTest\EFCoreTest.csproj", "{CD5BDF22-6526-4A3A-AA30-8FA02AF34523}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,13 +42,16 @@ Global
 		{50D84A35-7326-4262-9DE6-A09637F8AD62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50D84A35-7326-4262-9DE6-A09637F8AD62}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50D84A35-7326-4262-9DE6-A09637F8AD62}.Release|Any CPU.Build.0 = Release|Any CPU
-		{494CFC48-6D4F-4E0E-9045-977920FF8CBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{494CFC48-6D4F-4E0E-9045-977920FF8CBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{494CFC48-6D4F-4E0E-9045-977920FF8CBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{494CFC48-6D4F-4E0E-9045-977920FF8CBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD5BDF22-6526-4A3A-AA30-8FA02AF34523}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD5BDF22-6526-4A3A-AA30-8FA02AF34523}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD5BDF22-6526-4A3A-AA30-8FA02AF34523}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD5BDF22-6526-4A3A-AA30-8FA02AF34523}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CD5BDF22-6526-4A3A-AA30-8FA02AF34523} = {11E2DD7E-C2CC-47DA-A378-F85BAD2D1378}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FE51C28F-F56C-478A-AAFB-7FC42E56516D}

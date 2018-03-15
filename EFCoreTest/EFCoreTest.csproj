@@ -5,4 +5,9 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="KC.Foundation" Version="3.1.0" />
+    <PackageReference Include="KC.Foundation.Data" Version="3.1.0" />
+  </ItemGroup>
+
 </Project>
