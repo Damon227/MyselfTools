@@ -9,6 +9,7 @@
 // ***********************************************************************
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text;
@@ -19,7 +20,7 @@ namespace OutputConsole
     {
         private static void Main(string[] args)
         {
-            string path = @"D:\云棱镜报告导入源";
+            string path = @"D:\蜂鸟屋源码导出";
             string outputPath = "d:\\1.txt";
 
             DirectoryInfo info = new DirectoryInfo(path);
