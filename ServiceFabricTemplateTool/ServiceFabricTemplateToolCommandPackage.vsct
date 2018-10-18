@@ -22,7 +22,7 @@
 
   <!--The Commands section is where commands, menus, and menu groups are defined.
       This section uses a Guid to identify the package that provides the command defined inside it. -->
-  <Commands package="guidRightCmdPackage">
+  <Commands package="guidServiceFabricTemplateToolCommandPackage">
     <!-- Inside this section we have different sub-sections: one for the menus, another
     for the menu groups, one for the buttons (the actual commands), one for the combos
     and the last one for the bitmaps used. Each element is identified by a command id that
@@ -30,17 +30,26 @@
     called "command set" and is used to group different command inside a logically related
     group; your package should define its own command set in order to avoid collisions
     with command ids defined by other packages. -->
+    
+    <Menus>
+      <Menu guid="guidServiceFabricTemplateToolCommandPackageCmdSet" id="CreateProject2Menu" priority="0x0102" type="Menu">
+        <Parent guid="guidServiceFabricTemplateToolCommandPackageCmdSet" id="MyMenuGroup"/>
+        <Strings>
+          <ButtonText>Create Service Fabric Services</ButtonText>
+        </Strings>
+      </Menu>
+    </Menus>
 
     <!-- In this section you can define new menu groups. A menu group is a container for
          other menus or buttons (commands); from a visual point of view you can see the
          group as the part of a menu contained between two lines. The parent of a group
          must be a menu. -->
     <Groups>
-      <Group guid="guidRightCmdPackageCmdSet" id="MyMenuGroup" priority="0x0600">
-        <Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_TOOLS"/>
+      <Group guid="guidServiceFabricTemplateToolCommandPackageCmdSet" id="MyMenuGroup" priority="0x0600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_PROJNODE"/>
       </Group>
-      <Group guid="guidItemNodeCmdSet" id="ItemNode" priority="0x0100">
-        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_ITEMNODE"/>
+      <Group guid="guidServiceFabricTemplateToolCommandPackageCmdSet" id="CreateProjectGroup" priority="0x0102">
+        <Parent guid="guidServiceFabricTemplateToolCommandPackageCmdSet" id="CreateProject2Menu"/>
       </Group>
     </Groups>
 
@@ -55,18 +64,11 @@
               <CommandFlag>DefaultInvisible</CommandFlag>
               <CommandFlag>DynamicVisibility</CommandFlag>
           If you do not want an image next to your command, remove the Icon node /> -->
-      <Button guid="guidRightCmdPackageCmdSet" id="RightCmdId" priority="0x0100" type="Button">
-        <Parent guid="guidRightCmdPackageCmdSet" id="MyMenuGroup" />
+      <Button guid="guidServiceFabricTemplateToolCommandPackageCmdSet" id="ServiceFabricTemplateToolCommandId" priority="0x0100" type="Button">
+        <Parent guid="guidServiceFabricTemplateToolCommandPackageCmdSet" id="CreateProjectGroup" />
         <Icon guid="guidImages" id="bmpPic1" />
         <Strings>
-          <ButtonText>Invoke RightCmd</ButtonText>
-        </Strings>
-      </Button>
-      <Button guid="guidItemNodeCmdSet" id="ItemNode" priority="0x0100" type="Button">
-        <Parent guid="guidItemNodeCmdSet" id="ItemNode" />
-        <Icon guid="guidImages" id="bmpPic1" />
-        <Strings>
-          <ButtonText>Invoke RightCmd</ButtonText>
+          <ButtonText>Invoke ServiceFabricTemplateToolCommand</ButtonText>
         </Strings>
       </Button>
     </Buttons>
@@ -78,25 +80,23 @@
             bitmap strip containing the bitmaps and then there are the numeric ids of the elements used
             inside a button definition. An important aspect of this declaration is that the element id
             must be the actual index (1-based) of the bitmap inside the bitmap strip. -->
-      <Bitmap guid="guidImages" href="Resources\RightCmd.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough"/>
+      <Bitmap guid="guidImages" href="Resources\ServiceFabricTemplateToolCommand.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough"/>
     </Bitmaps>
   </Commands>
 
   <Symbols>
     <!-- This is the package guid. -->
-    <GuidSymbol name="guidRightCmdPackage" value="{96ce3030-ad8e-4063-a32e-a26d0fbd0932}" />
+    <GuidSymbol name="guidServiceFabricTemplateToolCommandPackage" value="{c781fafc-1334-4304-b95d-fb6709414172}" />
 
     <!-- This is the guid used to group the menu commands together -->
-    <GuidSymbol name="guidRightCmdPackageCmdSet" value="{328d1055-6143-4cec-92ed-f8183b074d93}">
+    <GuidSymbol name="guidServiceFabricTemplateToolCommandPackageCmdSet" value="{c781fafc-1334-4304-b95d-fb6709414172}">
       <IDSymbol name="MyMenuGroup" value="0x1020" />
-      <IDSymbol name="RightCmdId" value="0x0100" />
+      <IDSymbol name="CreateProject2Menu" value="0x1030" />
+      <IDSymbol name="CreateProjectGroup" value="0x1040" />
+      <IDSymbol name="ServiceFabricTemplateToolCommandId" value="0x0100" />
     </GuidSymbol>
 
-    <GuidSymbol name="guidItemNodeCmdSet" value="{FEE10FE9-F5DD-4D15-B1F0-563DDC3C8D25}">
-      <IDSymbol name="ItemNode" value="0x1004"/>
-    </GuidSymbol>
-
-    <GuidSymbol name="guidImages" value="{16e6f04d-6e52-4c04-8f8e-0f645c141ff5}" >
+    <GuidSymbol name="guidImages" value="{ae321494-86b6-4c83-b911-fffc5c519602}" >
       <IDSymbol name="bmpPic1" value="1" />
       <IDSymbol name="bmpPic2" value="2" />
       <IDSymbol name="bmpPicSearch" value="3" />
@@ -104,5 +104,9 @@
       <IDSymbol name="bmpPicArrows" value="5" />
       <IDSymbol name="bmpPicStrikethrough" value="6" />
     </GuidSymbol>
+
+    <!--<GuidSymbol name="guidServiceFabricTemplateToolCommandMenu" value="{c781fafc-1334-4304-b95d-fb6709414172}">
+      <IDSymbol name="ServiceFabricTemplateToolMenu" value="0x1100" />
+    </GuidSymbol>-->
   </Symbols>
 </CommandTable>

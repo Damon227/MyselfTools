@@ -9,6 +9,7 @@
 // ***********************************************************************
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using KC.Foundation.Data;
@@ -25,24 +26,28 @@ namespace EFCoreTest
         {
             MyDbContext dbContext = new MyDbContext(_connectionString);
 
-            City city = dbContext.ReadonlyQuery<City>().FirstOrDefault(t => t.CityName == "宁波");
-            if (city != null)
-            {
-                city.UpdateTime = Time.Now;
+            //City city = dbContext.ReadonlyQuery<City>().FirstOrDefault(t => t.CityName == "宁波");
+            //if (city != null)
+            //{
+            //    city.UpdateTime = Time.Now;
 
-                dbContext.Update(city);
-                dbContext.SaveChanges();
+            //    dbContext.Add(city);
+            //    dbContext.SaveChanges();
 
-                // 在同一个 DbContext 实例下,对同一条数据多次更新,如果不 Detached，后面更新会失败。
-                dbContext.Entry(city).State = EntityState.Detached;
-            }
+            //    // 在同一个 DbContext 实例下,对同一条数据多次更新,如果不 Detached，后面更新会失败。
+            //    dbContext.Entry(city).State = EntityState.Detached;
+            //}
 
-            City city2 = dbContext.ReadonlyQuery<City>().FirstOrDefault(t => t.CityName == "宁波");
-            if (city2 != null)
-            {
-                dbContext.Update(city2);
-                dbContext.SaveChanges();
-            }
+            //City city2 = dbContext.ReadonlyQuery<City>().FirstOrDefault(t => t.CityName == "宁波");
+            //if (city2 != null)
+            //{
+            //    dbContext.Update(city2);
+            //    dbContext.SaveChanges();
+            //}
+
+            City city = dbContext.ReadonlyQuery<City>().FirstOrDefault(t => t.CityName == "1");
+
+            Console.WriteLine(city?.ToString());
         }
     }
 }

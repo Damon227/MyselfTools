@@ -10,7 +10,7 @@ using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.Win32;
 
-namespace MenuExtension
+namespace ServiceFabricTemplateTool
 {
     /// <summary>
     /// This is the class that implements the package exposed by this assembly.
@@ -34,12 +34,12 @@ namespace MenuExtension
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [Guid(PackageGuidString)]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "pkgdef, VS and vsixmanifest are valid VS terms")]
-    public sealed class RightCmdPackage : Package
+    public sealed class ServiceFabricTemplateToolCommandPackage : Package
     {
         /// <summary>
-        /// RightCmdPackage GUID string.
+        /// ServiceFabricTemplateToolCommandPackage GUID string.
         /// </summary>
-        public const string PackageGuidString = "96ce3030-ad8e-4063-a32e-a26d0fbd0932";
+        public const string PackageGuidString = "ae4bcaa3-edae-49a1-bbc8-2a1ac8a4be6a";
 
         #region Package Members
 
@@ -49,7 +49,7 @@ namespace MenuExtension
         /// </summary>
         protected override void Initialize()
         {
-            RightCmd.Initialize(this);
+            ServiceFabricTemplateToolCommand.Initialize(this);
             base.Initialize();
         }
 

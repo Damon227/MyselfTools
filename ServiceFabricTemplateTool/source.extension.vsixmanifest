@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="MenuExtension.27f7e6a5-3223-4324-8652-1ad499f2eb87" Version="1.0" Language="en-US" Publisher="Damon Yuan" />
-    <DisplayName>MenuExtension</DisplayName>
+    <Identity Id="ServiceFabricTemplateTool.526ea78a-2d3f-45d0-9143-22a314ca5cde" Version="1.0" Language="en-US" Publisher="Damon Yuan" />
+    <DisplayName>ServiceFabricTemplateTool</DisplayName>
     <Description>Empty VSIX Project.</Description>
   </Metadata>
   <Installation>

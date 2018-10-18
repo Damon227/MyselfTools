@@ -1,7 +1,8 @@
 ﻿// ***********************************************************************
 // Solution         : MyselfTools
-// Project          : MenuExtension
-// File             : RightCmd.cs
+// Project          : ServiceFabricTemplateTool
+// File             : ServiceFabricTemplateToolCommand.cs
+// Updated          : 2018-05-28 17:40
 // ***********************************************************************
 // <copyright>
 //     Copyright © 2016 - 2017 Kolibre Credit Team. All rights reserved.
@@ -14,22 +15,22 @@ using System.Globalization;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 
-namespace MenuExtension
+namespace ServiceFabricTemplateTool
 {
     /// <summary>
     ///     Command handler
     /// </summary>
-    internal sealed class RightCmd
+    internal sealed class ServiceFabricTemplateToolCommand
     {
         /// <summary>
         ///     Command ID.
         /// </summary>
-        public const int CommandId = 0x1004;
+        public const int CommandId = 0x0100;
 
         /// <summary>
         ///     Command menu group (command set GUID).
         /// </summary>
-        public static readonly Guid CommandSet = new Guid("FEE10FE9-F5DD-4D15-B1F0-563DDC3C8D25");
+        public static readonly Guid CommandSet = new Guid("c781fafc-1334-4304-b95d-fb6709414172");
 
         /// <summary>
         ///     VS Package that provides this command, not null.
@@ -37,13 +38,18 @@ namespace MenuExtension
         private readonly Package package;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="RightCmd" /> class.
+        ///     Initializes a new instance of the <see cref="ServiceFabricTemplateToolCommand" /> class.
         ///     Adds our command handlers for menu (commands must exist in the command table file)
         /// </summary>
         /// <param name="package">Owner package, not null.</param>
-        private RightCmd(Package package)
+        private ServiceFabricTemplateToolCommand(Package package)
         {
-            this.package = package ?? throw new ArgumentNullException(nameof(package));
+            if (package == null)
+            {
+                throw new ArgumentNullException(nameof(package));
+            }
+
+            this.package = package;
 
             OleMenuCommandService commandService = ServiceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
             if (commandService != null)
@@ -57,7 +63,7 @@ namespace MenuExtension
         /// <summary>
         ///     Gets the instance of the command.
         /// </summary>
-        public static RightCmd Instance { get; private set; }
+        public static ServiceFabricTemplateToolCommand Instance { get; private set; }
 
         /// <summary>
         ///     Gets the service provider from the owner package.
@@ -70,7 +76,7 @@ namespace MenuExtension
         /// <param name="package">Owner package, not null.</param>
         public static void Initialize(Package package)
         {
-            Instance = new RightCmd(package);
+            Instance = new ServiceFabricTemplateToolCommand(package);
         }
 
         /// <summary>
@@ -83,9 +89,7 @@ namespace MenuExtension
         private void MenuItemCallback(object sender, EventArgs e)
         {
             string message = string.Format(CultureInfo.CurrentCulture, "Inside {0}.MenuItemCallback()", GetType().FullName);
-            string title = "RightCmd";
-
-            //string dic = Environment.CurrentDirectory;
+            string title = "ServiceFabricTemplateToolCommand";
 
             // Show a message box to prove we were here
             VsShellUtilities.ShowMessageBox(

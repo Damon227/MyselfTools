@@ -20,17 +20,22 @@ namespace OutputConsole
     {
         private static void Main(string[] args)
         {
-            string path = @"D:\蜂鸟屋源码导出";
-            string outputPath = "d:\\1.txt";
+            WriteToFile();
+
+            Console.ReadLine();
+        }
+
+        private static void WriteToFile()
+        {
+            string path = @"D:\业务管理系统代码导出";
+            string outputPath = "d:\\2.txt";
 
             DirectoryInfo info = new DirectoryInfo(path);
 
             StringBuilder sb = new StringBuilder();
             Output(info, sb);
-            
-            File.AppendAllText(outputPath, sb.ToString());
 
-            Console.ReadLine();
+            File.AppendAllText(outputPath, sb.ToString());
         }
 
         [SuppressMessage("ReSharper", "ForCanBeConvertedToForeach")]
