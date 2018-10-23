@@ -11,7 +11,7 @@ using Org.BouncyCastle.Pkcs;
 using Org.BouncyCastle.Security;
 using Org.BouncyCastle.X509;
 
-namespace CertificateHelper
+namespace DamonHelper.sys
 {
     /// <summary>
     ///     证书帮助类

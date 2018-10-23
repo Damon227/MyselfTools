@@ -32,11 +32,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KC.Fengniaowu.Eos.ResourceS
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{78C97F17-2FD1-41D6-95BF-4BAC5F5C5F17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{536518D7-0F00-44D1-819D-DED6240BD4C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{536518D7-0F00-44D1-819D-DED6240BD4C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foundation.Tools", "Foundation.Tools\Foundation.Tools.csproj", "{DE877777-01BF-4E86-9F78-DB4984FE7EF0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Foundation.Tools", "Foundation.Tools\Foundation.Tools.csproj", "{DE877777-01BF-4E86-9F78-DB4984FE7EF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CertificateHelper", "CertificateHelper\CertificateHelper.csproj", "{D6CA2B65-C622-4933-87DD-75B75ADA83B2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DamonHelper", "DamonHelper\DamonHelper.csproj", "{D6CA2B65-C622-4933-87DD-75B75ADA83B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

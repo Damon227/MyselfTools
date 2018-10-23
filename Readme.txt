@@ -1,2 +1,2 @@
-OutputConsole -> ¶àÎÄ¼þÄÚÈÝÊä³öµ½Ò»¸öÎÄ¼þÀï¡£
+OutputConsole -> ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¡£
 SFVersionTool -> Service Fabric Version Controll Tool.
