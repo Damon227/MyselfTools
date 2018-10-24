@@ -10,9 +10,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DamonHelper.Config;
 using DamonHelper.Models;
 using DamonHelper.sys;
+using DamonHelper.Settings;
 using Dapper;
 using Newtonsoft.Json.Linq;
 
@@ -43,6 +43,11 @@ namespace DamonHelper
                 connection.Open();
 
                 List<SimpleTenancy> result = connection.Query<SimpleTenancy>(sql).ToList();
+                result.Insert(0, new SimpleTenancy
+                {
+                    TenancyId = "",
+                    TenancyName = "请选择"
+                });
 
                 cmb_Tenancies.DataSource = result;
                 cmb_Tenancies.DisplayMember = "TenancyName";
@@ -248,7 +253,7 @@ namespace DamonHelper
 
         private static async Task ClearCacheOfOrderAsync(string orderId)
         {
-            HttpClient httpClient = new HttpClient { BaseAddress = new Uri(Config.Config.TalosBaseAddress) };
+            HttpClient httpClient = new HttpClient { BaseAddress = new Uri(Config.TalosBaseAddress) };
 
             string sessionId;
             if (!string.IsNullOrEmpty(s_sessionIdCache.SessionId) && s_sessionIdCache.ExpiryTime < Time.Now)

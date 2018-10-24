@@ -10,13 +10,13 @@
 
 using System.Data.SqlClient;
 
-namespace DamonHelper.Config
+namespace DamonHelper.Settings
 {
     public class SqlConnectionExtensions
     {
         public static SqlConnection GetConnection()
         {
-            return new SqlConnection(Config.TalosDbConnectionString_Pro);
+            return new SqlConnection(Config.TalosDbConnectionString);
         }
     }
 }
