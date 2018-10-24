@@ -112,7 +112,7 @@ namespace DamonHelper
             string credentialType = txb_CredentialType.Text.Trim();
             string credentialNo = txb_CredentialNo.Text.Trim();
             string userName = domain.Split('.').Last() + "Administrator";
-            string passwordHash = "AQAAAAEAACcQAAAAEMfdU3dK+R1uC7YkQ2exN/hJ7g6WJ+PN2Nvbr76BdVIVr69uVp85NgY1fVdNZ9dJXA==";
+            string passwordHash = "AQAAAAEAACcQAAAAEMfdU3dK+R1uC7YkQ2exN/hJ7g6WJ+PN2Nvbr76BdVIVr69uVp85NgY1fVdNZ9dJXA=="; //默认密码111111
 
             if (string.IsNullOrEmpty(cellphone))
             {
@@ -124,9 +124,19 @@ namespace DamonHelper
                 MessageBox.Show("License can not be null or empty.");
                 return;
             }
+            if (license == "@xxx.com")
+            {
+                MessageBox.Show("请修改 License.");
+                return;
+            }
             if (string.IsNullOrEmpty(domain))
             {
                 MessageBox.Show("Domain can not be null or empty.");
+                return;
+            }
+            if (domain == "@fengniaowu.tenancy.asset.xxx")
+            {
+                MessageBox.Show("请修改 Domain.");
                 return;
             }
             if (string.IsNullOrEmpty(tenancyType))

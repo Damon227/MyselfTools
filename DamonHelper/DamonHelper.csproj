@@ -33,8 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>icon-256.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.3.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
@@ -134,10 +133,8 @@
     <EmbeddedResource Include="TalosEncrytForm.resx">
       <DependentUpon>TalosEncrytForm.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="appsettings.development.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="appsettings.production.json" />
+    <EmbeddedResource Include="appsettings.development.json" />
+    <EmbeddedResource Include="appsettings.production.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -155,6 +152,7 @@
   <ItemGroup>
     <Content Include="help\help.txt" />
     <Content Include="help\ILMerge.exe" />
+    <Content Include="icon-256.ico" />
     <Content Include="icons\icon-256.ico" />
     <Content Include="icons\icon-64.ico" />
   </ItemGroup>

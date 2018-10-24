@@ -10,7 +10,9 @@
 
 using System;
 using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace DamonHelper.Settings
@@ -24,11 +26,13 @@ namespace DamonHelper.Settings
         public static bool InitConfig(string env)
         {
             // 读取json配置
-            string jsonFile = $"appsettings.{env.ToLower()}.json";
+            string jsonFile = $"DamonHelper.appsettings.{env.ToLower()}.json";
             try
             {
-                string jsonContent = File.ReadAllText(jsonFile);
-                JObject json = JObject.Parse(jsonContent);
+                Assembly asm = Assembly.GetExecutingAssembly();//读取嵌入式资源
+                Stream sm = asm.GetManifestResourceStream(jsonFile);
+                StreamReader sr = new StreamReader(sm);
+                JObject json = JObject.Load(new JsonTextReader(sr));
 
                 TalosDbConnectionString = json["TalosDbConnectionString"].ToString();
                 TalosBaseAddress = json["TalosBaseAddress"].ToString();
