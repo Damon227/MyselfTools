@@ -61,21 +61,21 @@
             // 加解密ToolStripMenuItem
             // 
             this.加解密ToolStripMenuItem.Name = "加解密ToolStripMenuItem";
-            this.加解密ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.加解密ToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.加解密ToolStripMenuItem.Text = "加解密";
             this.加解密ToolStripMenuItem.Click += new System.EventHandler(this.加解密ToolStripMenuItem_Click);
             // 
             // 注册商户ToolStripMenuItem
             // 
             this.注册商户ToolStripMenuItem.Name = "注册商户ToolStripMenuItem";
-            this.注册商户ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.注册商户ToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.注册商户ToolStripMenuItem.Text = "注册商户";
             this.注册商户ToolStripMenuItem.Click += new System.EventHandler(this.注册商户ToolStripMenuItem_Click);
             // 
             // 取消违约金ToolStripMenuItem
             // 
             this.取消违约金ToolStripMenuItem.Name = "取消违约金ToolStripMenuItem";
-            this.取消违约金ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.取消违约金ToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.取消违约金ToolStripMenuItem.Text = "取消违约金";
             this.取消违约金ToolStripMenuItem.Click += new System.EventHandler(this.取消违约金ToolStripMenuItem_Click);
             // 
@@ -100,7 +100,7 @@
             this.MaximizeBox = false;
             this.Name = "Home";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "偷懒神器V1.0";
+            this.Text = "偷懒神器";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

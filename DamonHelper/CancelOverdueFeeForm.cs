@@ -249,6 +249,10 @@ namespace DamonHelper
                     }
                 }
             }
+
+            _selectedRowIndexs.Clear();
+
+            MessageBox.Show("取消违约金成功");
         }
 
         private static async Task ClearCacheOfOrderAsync(string orderId)
