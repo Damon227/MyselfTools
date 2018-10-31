@@ -1,5 +1,0 @@
-﻿打包成一个exe:
-C:\Program Files (x86)\Microsoft\ILMerge\ILMerge.exe
-
-输出目录运行cmd
-..\..\Help\ILMerge.exe /ndebug /target:winexe /targetplatform:v4 /out:偷懒神器.exe DamonHelper.exe /log BouncyCastle.Crypto.dll /log Dapper.dll /log Newtonsoft.Json.dll /log System.Net.Http.Extensions.dll /log System.Net.Http.Formatting.dll /log System.Net.Http.Primitives.dll /log System.ValueTuple.dll

@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DamonHelper.Helper;
 using DamonHelper.Models;
 using DamonHelper.sys;
 using DamonHelper.Settings;
@@ -259,40 +260,7 @@ namespace DamonHelper
         {
             HttpClient httpClient = new HttpClient { BaseAddress = new Uri(Config.TalosBaseAddress) };
 
-            string sessionId;
-            if (!string.IsNullOrEmpty(s_sessionIdCache.SessionId) && s_sessionIdCache.ExpiryTime < Time.Now)
-            {
-                sessionId = s_sessionIdCache.SessionId;
-            }
-            else
-            {
-                var content0 = new
-                {
-                    TenancyId = "28342C66E8EE408E9070452799CC8F6E",
-                    LoginInfoAccount = "10100000000",
-                    Password = "KC@2018"
-                };
-
-                HttpResponseMessage response0 = await httpClient.PostAsJsonAsync("api/PasswordLogin/Account/Login", content0);
-                if (!response0.IsSuccessStatusCode)
-                {
-                    MessageBox.Show("管理员登录失败");
-                    return;
-                }
-
-                string responseString0 = await response0.Content.ReadAsStringAsync();
-                JObject obj0 = JObject.Parse(responseString0);
-                if (!(bool)obj0["succeeded"])
-                {
-                    MessageBox.Show("管理员登录失败" + obj0["message"]);
-                    return;
-                }
-
-                sessionId = obj0["headers"]["x-KC-SID"].ToString();
-            }
-
-
-            httpClient.DefaultRequestHeaders.Add("X-KC-SID", sessionId);
+            httpClient.DefaultRequestHeaders.Add("X-KC-SID", SessionIdHelper.SessionId);
 
             var content1 = new
             {

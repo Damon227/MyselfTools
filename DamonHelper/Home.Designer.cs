@@ -35,6 +35,7 @@
             this.注册商户ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.取消违约金ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.用户解锁ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,7 +54,8 @@
             this.蜂鸟屋ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.加解密ToolStripMenuItem,
             this.注册商户ToolStripMenuItem,
-            this.取消违约金ToolStripMenuItem});
+            this.取消违约金ToolStripMenuItem,
+            this.用户解锁ToolStripMenuItem});
             this.蜂鸟屋ToolStripMenuItem.Name = "蜂鸟屋ToolStripMenuItem";
             this.蜂鸟屋ToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.蜂鸟屋ToolStripMenuItem.Text = "蜂鸟屋";
@@ -61,21 +63,21 @@
             // 加解密ToolStripMenuItem
             // 
             this.加解密ToolStripMenuItem.Name = "加解密ToolStripMenuItem";
-            this.加解密ToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.加解密ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.加解密ToolStripMenuItem.Text = "加解密";
             this.加解密ToolStripMenuItem.Click += new System.EventHandler(this.加解密ToolStripMenuItem_Click);
             // 
             // 注册商户ToolStripMenuItem
             // 
             this.注册商户ToolStripMenuItem.Name = "注册商户ToolStripMenuItem";
-            this.注册商户ToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.注册商户ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.注册商户ToolStripMenuItem.Text = "注册商户";
             this.注册商户ToolStripMenuItem.Click += new System.EventHandler(this.注册商户ToolStripMenuItem_Click);
             // 
             // 取消违约金ToolStripMenuItem
             // 
             this.取消违约金ToolStripMenuItem.Name = "取消违约金ToolStripMenuItem";
-            this.取消违约金ToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.取消违约金ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.取消违约金ToolStripMenuItem.Text = "取消违约金";
             this.取消违约金ToolStripMenuItem.Click += new System.EventHandler(this.取消违约金ToolStripMenuItem_Click);
             // 
@@ -87,6 +89,13 @@
             this.panel1.Size = new System.Drawing.Size(1160, 715);
             this.panel1.TabIndex = 1;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // 用户解锁ToolStripMenuItem
+            // 
+            this.用户解锁ToolStripMenuItem.Name = "用户解锁ToolStripMenuItem";
+            this.用户解锁ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.用户解锁ToolStripMenuItem.Text = "用户解锁";
+            this.用户解锁ToolStripMenuItem.Click += new System.EventHandler(this.用户解锁ToolStripMenuItem_Click);
             // 
             // Home
             // 
@@ -116,6 +125,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStripMenuItem 注册商户ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 取消违约金ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 用户解锁ToolStripMenuItem;
     }
 }
 

@@ -62,6 +62,23 @@ namespace DamonHelper
             registerTenancyForm.Show();
         }
 
+        private void 用户解锁ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            panel1.Controls.Clear();
+
+            UnlockForm unlockForm = new UnlockForm
+            {
+                TopLevel = false,
+                FormBorderStyle = FormBorderStyle.None
+            };
+
+            unlockForm.Top = (panel1.Height - unlockForm.Height) / 2;
+            unlockForm.Left = (panel1.Width - unlockForm.Width) / 2;
+
+            panel1.Controls.Add(unlockForm);
+            unlockForm.Show();
+        }
+
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
             ControlPaint.DrawBorder(e.Graphics, panel1.ClientRectangle,
