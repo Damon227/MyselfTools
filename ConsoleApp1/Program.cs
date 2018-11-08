@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -11,7 +13,8 @@ namespace ConsoleApp1
     {
         private static void Main(string[] args)
         {
-            CertTest();
+            //MagicLockTest test = new MagicLockTest();
+            //test.StartTest();
 
             Console.ReadKey();
         }
@@ -60,6 +63,13 @@ namespace ConsoleApp1
             RSA rsa2 = RSA.Create();
             rsa.FromCustomXmlString(publicKey);
             bool verify = rsa2.VerifyData(data, signData, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+        }
+
+        private static void Test3()
+        {
+            List<TestClass> list = new List<TestClass>();
+
+            List<string> ids = list.FindAll(t => t.Id == "1").Select(t => t.Id).ToList();
         }
     }
 }

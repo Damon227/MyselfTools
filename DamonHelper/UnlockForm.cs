@@ -32,6 +32,12 @@ namespace DamonHelper
                 return;
             }
 
+            if (cellphone == "10100000000")
+            {
+                MessageBox.Show("该手机号无法解锁");
+                return;
+            }
+
             // 通过手机号查询UserId
             string userId;
             using (SqlConnection connection = SqlConnectionExtensions.GetConnection())

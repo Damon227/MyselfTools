@@ -38,22 +38,16 @@ namespace DamonHelper
 
         private void InitTenancies()
         {
-            string sql = "select TenancyId, TenancyName from dbo.[KC.Fengniaowu.Talos.Tenancies] where Enabled = 1";
-            using (SqlConnection connection = SqlConnectionExtensions.GetConnection())
+            List<SimpleTenancy> result = DataHelper.GetTenancies();
+            result.Insert(0, new SimpleTenancy
             {
-                connection.Open();
+                TenancyId = "",
+                TenancyName = "请选择"
+            });
 
-                List<SimpleTenancy> result = connection.Query<SimpleTenancy>(sql).ToList();
-                result.Insert(0, new SimpleTenancy
-                {
-                    TenancyId = "",
-                    TenancyName = "请选择"
-                });
-
-                cmb_Tenancies.DataSource = result;
-                cmb_Tenancies.DisplayMember = "TenancyName";
-                cmb_Tenancies.ValueMember = "TenancyId";
-            }
+            cmb_Tenancies.DataSource = result;
+            cmb_Tenancies.DisplayMember = "TenancyName";
+            cmb_Tenancies.ValueMember = "TenancyId";
         }
 
         private void btn_CancelOverdueFeeForm_Query_Click(object sender, EventArgs e)

@@ -81,7 +81,16 @@
     <Compile Include="CancelOverdueFeeForm.Designer.cs">
       <DependentUpon>CancelOverdueFeeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helper\DataHelper.cs" />
     <Compile Include="Helper\SessionIdHelper.cs" />
+    <Compile Include="Models\PenaltySetting.cs" />
+    <Compile Include="Models\SimpleApartment.cs" />
+    <Compile Include="PenaltySettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PenaltySettingForm.Designer.cs">
+      <DependentUpon>PenaltySettingForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Settings\Config.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Permission.cs" />
@@ -123,6 +132,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PenaltySettingForm.resx">
+      <DependentUpon>PenaltySettingForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -87,5 +87,22 @@ namespace DamonHelper
                 Color.DarkGoldenrod, 1, ButtonBorderStyle.Solid, //右边
                 Color.DarkGoldenrod, 1, ButtonBorderStyle.Solid);//底边
         }
+
+        private void 配置违约金ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            panel1.Controls.Clear();
+
+            PenaltySettingForm form = new PenaltySettingForm
+            {
+                TopLevel = false,
+                FormBorderStyle = FormBorderStyle.None
+            };
+
+            form.Top = (panel1.Height - form.Height) / 2;
+            form.Left = (panel1.Width - form.Width) / 2;
+
+            panel1.Controls.Add(form);
+            form.Show();
+        }
     }
 }
