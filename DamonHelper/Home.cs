@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using DamonHelper.Settings;
 
 namespace DamonHelper
 {
@@ -9,6 +10,23 @@ namespace DamonHelper
         public Home()
         {
             InitializeComponent();
+
+            SetText();
+        }
+
+        private void SetText()
+        {
+            string env = "正式版";
+            if (Config.Environment == Settings.Environment.Test.ToString())
+            {
+                env = "测试版";
+            }
+            if (Config.Environment == Settings.Environment.Development.ToString())
+            {
+                env = "开发版";
+            }
+
+            Text = Text + env;
         }
 
         private void 加解密ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -93,6 +111,23 @@ namespace DamonHelper
             panel1.Controls.Clear();
 
             PenaltySettingForm form = new PenaltySettingForm
+            {
+                TopLevel = false,
+                FormBorderStyle = FormBorderStyle.None
+            };
+
+            form.Top = (panel1.Height - form.Height) / 2;
+            form.Left = (panel1.Width - form.Width) / 2;
+
+            panel1.Controls.Add(form);
+            form.Show();
+        }
+
+        private void 用户权限管理ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            panel1.Controls.Clear();
+
+            PermissionManagerForm form = new PermissionManagerForm
             {
                 TopLevel = false,
                 FormBorderStyle = FormBorderStyle.None

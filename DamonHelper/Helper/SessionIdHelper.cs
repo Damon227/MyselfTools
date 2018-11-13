@@ -40,9 +40,9 @@ namespace DamonHelper.Helper
         {
             var content0 = new
             {
-                TenancyId = "28342C66E8EE408E9070452799CC8F6E",
-                LoginInfoAccount = "10100000000",
-                Password = "KC@2018"
+                tenancyId = Config.TenancyId,
+                loginInfoAccount = Config.LoginAccount,
+                password = Config.Password
             };
 
             HttpClient httpClient = new HttpClient { BaseAddress = new Uri(Config.TalosBaseAddress) };

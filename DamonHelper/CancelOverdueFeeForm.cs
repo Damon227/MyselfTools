@@ -254,7 +254,13 @@ namespace DamonHelper
         {
             HttpClient httpClient = new HttpClient { BaseAddress = new Uri(Config.TalosBaseAddress) };
 
-            httpClient.DefaultRequestHeaders.Add("X-KC-SID", SessionIdHelper.SessionId);
+            string sessionId = SessionIdHelper.SessionId;
+            if (string.IsNullOrEmpty(sessionId))
+            {
+                return;
+            }
+
+            httpClient.DefaultRequestHeaders.Add("X-KC-SID", sessionId);
 
             var content1 = new
             {

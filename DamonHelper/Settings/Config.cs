@@ -19,12 +19,22 @@ namespace DamonHelper.Settings
 {
     public static class Config
     {
+        public static string Environment { get; set; }
+
         public static string TalosDbConnectionString { get; set; }
 
         public static string TalosBaseAddress { get; set; }
 
+        public static string TenancyId { get; set; }
+
+        public static string LoginAccount { get; set; }
+
+        public static string Password { get; set; }
+
         public static bool InitConfig(string env)
         {
+            Environment = env;
+
             // 读取json配置
             string jsonFile = $"DamonHelper.appsettings.{env.ToLower()}.json";
             try
@@ -36,6 +46,9 @@ namespace DamonHelper.Settings
 
                 TalosDbConnectionString = json["TalosDbConnectionString"].ToString();
                 TalosBaseAddress = json["TalosBaseAddress"].ToString();
+                TenancyId = json["TenancyId"].ToString();
+                LoginAccount = json["LoginAccount"].ToString();
+                Password = json["Password"].ToString();
             }
             catch (DirectoryNotFoundException)
             {

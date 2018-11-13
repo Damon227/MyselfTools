@@ -81,15 +81,31 @@
     <Compile Include="CancelOverdueFeeForm.Designer.cs">
       <DependentUpon>CancelOverdueFeeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helper\CustomEventArgs.cs" />
     <Compile Include="Helper\DataHelper.cs" />
+    <Compile Include="Helper\FormExtensions.cs" />
+    <Compile Include="Helper\MessageBoxExtensions.cs" />
+    <Compile Include="Helper\MessageBoxHelper.cs" />
     <Compile Include="Helper\SessionIdHelper.cs" />
     <Compile Include="Models\PenaltySetting.cs" />
     <Compile Include="Models\SimpleApartment.cs" />
+    <Compile Include="OutputForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OutputForm.Designer.cs">
+      <DependentUpon>OutputForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="PenaltySettingForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PenaltySettingForm.Designer.cs">
       <DependentUpon>PenaltySettingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PermissionManagerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PermissionManagerForm.Designer.cs">
+      <DependentUpon>PermissionManagerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Settings\Config.cs" />
     <Compile Include="Models\Order.cs" />
@@ -101,6 +117,7 @@
     <Compile Include="RegisterTenancyForm.Designer.cs">
       <DependentUpon>RegisterTenancyForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Settings\Environment.cs" />
     <Compile Include="Settings\SqlConnectionExtensions.cs" />
     <Compile Include="sys\DateTimeOffsetExtentions.cs" />
     <Compile Include="Home.cs">
@@ -133,8 +150,14 @@
     <EmbeddedResource Include="Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OutputForm.resx">
+      <DependentUpon>OutputForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PenaltySettingForm.resx">
       <DependentUpon>PenaltySettingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PermissionManagerForm.resx">
+      <DependentUpon>PermissionManagerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
