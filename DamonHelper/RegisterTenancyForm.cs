@@ -248,14 +248,16 @@ namespace DamonHelper
                 string positionId5 = ID.NewSequentialGuid().ToGuidString();
                 string positionId6 = ID.NewSequentialGuid().ToGuidString();
                 string positionId7 = ID.NewSequentialGuid().ToGuidString();
-                string roleIdd1 = ID.NewSequentialGuid().ToGuidString();
-                string roleIdd2 = ID.NewSequentialGuid().ToGuidString();
-                string roleIdd3 = ID.NewSequentialGuid().ToGuidString();
-                string roleIdd4 = ID.NewSequentialGuid().ToGuidString();
+                string roleId1 = ID.NewSequentialGuid().ToGuidString();
+                string roleId2 = ID.NewSequentialGuid().ToGuidString();
+                string roleId3 = ID.NewSequentialGuid().ToGuidString();
+                string roleId4 = ID.NewSequentialGuid().ToGuidString();
+                List<string> roleIds = new List<string> { roleId1, roleId2, roleId3, roleId4 };
                 string userId = ID.NewSequentialGuid().ToGuidString();
                 string loginInfoId = ID.NewSequentialGuid().ToGuidString();
                 string accountId = ID.NewSequentialGuid().ToGuidString();
-                string digitalId = ID.NewSequentialGuid().ToGuidString();
+                string digitalId1 = ID.NewSequentialGuid().ToGuidString();
+                string digitalId2 = ID.NewSequentialGuid().ToGuidString();
                 string digitalConfigId = ID.NewSequentialGuid().ToGuidString();
                 
 
@@ -308,19 +310,19 @@ VALUES ('{positionId6.ToGuid()}', '{positionId6}', '{tenancyId}', N'运营经理
 VALUES ('{positionId7.ToGuid()}', '{positionId7}', '{tenancyId}', N'其他', '1', '{time}', '{time}', N'{{}}')";
 
                 string s14 = $@"INSERT INTO [dbo].[KC.Fengniaowu.Talos.Roles]([ActorId], [RoleId], [RoleName], [Description], [Enabled], [Permissions], [CreateTime], [UpdateTime], [Data]) 
-VALUES ('{roleIdd1.ToGuid()}', '{roleIdd1}', N'财务' + '{domain}', N'财务日常操作，财务包含数据导出权限', '1', N'[{string.Join(",", permissionIds1)}]', '{time}', '{time}', N'{{}}')";
+VALUES ('{roleId1.ToGuid()}', '{roleId1}', N'财务' + '{domain}', N'财务日常操作，财务包含数据导出权限', '1', N'[{string.Join(",", permissionIds1)}]', '{time}', '{time}', N'{{}}')";
 
                 string s15 = $@"INSERT INTO [dbo].[KC.Fengniaowu.Talos.Roles]([ActorId], [RoleId], [RoleName], [Description], [Enabled], [Permissions], [CreateTime], [UpdateTime], [Data]) 
-VALUES ('{roleIdd2.ToGuid()}', '{roleIdd2}', N'店长' + '{domain}', N'管家日常管理，包括签约、续租、退租、账单', '1', N'[{string.Join(",", permissionIds2)}]', '{time}', '{time}', N'{{}}')";
+VALUES ('{roleId2.ToGuid()}', '{roleId2}', N'店长' + '{domain}', N'管家日常管理，包括签约、续租、退租、账单', '1', N'[{string.Join(",", permissionIds2)}]', '{time}', '{time}', N'{{}}')";
 
                 string s16 = $@"INSERT INTO [dbo].[KC.Fengniaowu.Talos.Roles]([ActorId], [RoleId], [RoleName], [Description], [Enabled], [Permissions], [CreateTime], [UpdateTime], [Data]) 
-VALUES ('{roleIdd3.ToGuid()}', '{roleIdd3}', N'管理层' + '{domain}', N'方便管理层数据监控、可以浏览所有权限', '1', N'[{string.Join(",", permissionIds2)}]', '{time}', '{time}', N'{{}}')";
+VALUES ('{roleId3.ToGuid()}', '{roleId3}', N'管理层' + '{domain}', N'方便管理层数据监控、可以浏览所有权限', '1', N'[{string.Join(",", permissionIds2)}]', '{time}', '{time}', N'{{}}')";
 
                 string s17 = $@"INSERT INTO [dbo].[KC.Fengniaowu.Talos.Roles]([ActorId], [RoleId], [RoleName], [Description], [Enabled], [Permissions], [CreateTime], [UpdateTime], [Data]) 
-VALUES ('{roleIdd4.ToGuid()}', '{roleIdd4}', N'IT管理' + '{domain}', N'负责平时系统管理，拥有大部分权限', '1', N'[{string.Join(",", permissionIds2)}]', '{time}', '{time}', N'{{}}')";
+VALUES ('{roleId4.ToGuid()}', '{roleId4}', N'IT管理' + '{domain}', N'负责平时系统管理，拥有大部分权限', '1', N'[{string.Join(",", permissionIds2)}]', '{time}', '{time}', N'{{}}')";
 
                 string s18 = $@"INSERT INTO [dbo].[KC.Fengniaowu.Talos.Users] ([ActorId], [UserId], [UserName], [Description], [Enabled], [Roles], [Permissions], [CreateTime], [UpdateTime], [Data]) 
-VALUES ('{userId.ToGuid()}', '{userId}', '{userName}', N'Administrator', '1', N'[]', N'[{string.Join(",", permissionIds3)}]', '{time}', '{time}', N'{{}}')";
+VALUES ('{userId.ToGuid()}', '{userId}', '{userName}', N'Administrator', '1', N'[{string.Join(",", roleIds)}]', N'[{string.Join(",", permissionIds3)}]', '{time}', '{time}', N'{{}}')";
 
                 string s19 = $@"INSERT INTO [dbo].[KC.Fengniaowu.Talos.LoginInfos] ([LoginInfoId], [LoginInfoAccount], [LoginInfoType], [UserId], [Enabled], [CreateTime]) 
 VALUES ('{loginInfoId.ToGuid()}', '{cellphone}', 'Cellphone', '{userId}', '1', '{time}')";
@@ -333,15 +335,18 @@ VALUES ('{userId.ToGuid()}', '{userId}', '{passwordHash}', NULL, '1', '0', '1', 
 
                 string temp22 = "{\"tenancyName\":\""+companyName+"\",\"tenancyOrganizationNumber\":\""+cuscc+"\"}";
                 string s22 = $@"INSERT INTO [dbo].[KC.Fengniaowu.Talos.DigitalContractConfigs]([DigitalContractConfigId], [Name], [TemplateType], [Description], [RequestParameters], [HtmlContentUrl], [Enabled], [CreateTime], [UpdateTime], [Data]) 
-VALUES ('{digitalId}', N'居住房屋租赁合同', N'TongYongZuFang', N'', '{temp22}', N'https://kolibrestore.blob.core.chinacloudapi.cn/public/uploads/apartment/digitalcontract/templates/tongyongzufang_20180505.html', '1', '{time}', '{time}', N'{{}}')";
+VALUES ('{digitalId1}', N'居住房屋租赁合同', N'TongYongZuFang', N'', '{temp22}', N'https://kolibrestore.blob.core.chinacloudapi.cn/public/uploads/apartment/digitalcontract/templates/tongyongzufang_20180505.html', '1', '{time}', '{time}', N'{{}}')";
 
-                string temp23 = "[[\"" + digitalId + "\"]]";
-                string s23 = $@"INSERT INTO [dbo].[KC.Fengniaowu.Talos.DigitalContractRelationConfigs]([DigitalContractRelationConfigId], [EntityType], [EntityId], [ConfigContent], [Enabled], [CreateTime], [UpdateTime], [Data], [ContractProcess]) 
-VALUES ('{digitalConfigId}', N'Tenancy', '{tenancyId}', '{temp23}', '1', '{time}', '{time}', N'{{}}', N'Sign')";
+                string s23 = $@"INSERT INTO [dbo].[KC.Fengniaowu.Talos.DigitalContractConfigs]([DigitalContractConfigId], [Name], [TemplateType], [Description], [RequestParameters], [HtmlContentUrl], [Enabled], [CreateTime], [UpdateTime], [Data]) 
+VALUES ('{digitalId2}', N'补充协议', N'RentSupplementaryAgreement', N'', '{temp22}', N'https://kolibrestore.blob.core.chinacloudapi.cn/public/uploads/apartment/digitalcontract/templates/buchong.html', '1', '{time}', '{time}', N'{{}}')";
+
+                string temp24 = "[[\"" + digitalId1 + "\"],[\"" + digitalId2 + "\"]]";
+                string s24 = $@"INSERT INTO [dbo].[KC.Fengniaowu.Talos.DigitalContractRelationConfigs]([DigitalContractRelationConfigId], [EntityType], [EntityId], [ConfigContent], [Enabled], [CreateTime], [UpdateTime], [Data], [ContractProcess]) 
+VALUES ('{digitalConfigId}', N'Tenancy', '{tenancyId}', '{temp24}', '1', '{time}', '{time}', N'{{}}', N'Sign')";
 
                 Dictionary<string, string> tempDic = new Dictionary<string, string>
                 {
-                    {"s0",s0},{"s1",s1 },{"s2",s2 },{"s3",s3 },{"s4",s4 },{"s5",s5 },{"s6",s6 },{"s7",s7 },{"s8",s8 },{"s9",s9 },{"s10",s10 },{"s11",s11 },{"s12",s12 },{"s13",s13 },{"s14",s14 },{"s15",s15 },{"s16",s16 },{"s17",s17 },{"s18",s18 },{"s19",s19 },{"s20",s20 },{"s21",s21 },{"s22",s22 },{"s23",s23 }
+                    {"s0",s0},{"s1",s1 },{"s2",s2 },{"s3",s3 },{"s4",s4 },{"s5",s5 },{"s6",s6 },{"s7",s7 },{"s8",s8 },{"s9",s9 },{"s10",s10 },{"s11",s11 },{"s12",s12 },{"s13",s13 },{"s14",s14 },{"s15",s15 },{"s16",s16 },{"s17",s17 },{"s18",s18 },{"s19",s19 },{"s20",s20 },{"s21",s21 },{"s22",s22 },{"s23",s23 },{"s24",s24 }
                 };
 
                 // 执行SQL语句

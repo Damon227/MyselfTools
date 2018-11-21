@@ -42,7 +42,7 @@ namespace DamonHelper
             string userId;
             using (SqlConnection connection = SqlConnectionExtensions.GetConnection())
             {
-                string sql = $"select UserId from dbo.[KC.Fengniaowu.Talos.Users] where UserName = '{cellphone}' and Enabled = 1";
+                string sql = $"select UserId from dbo.[KC.Fengniaowu.Talos.Accounts] where Cellphone = '{cellphone}' and Enabled = 1";
                 userId = connection.QueryFirstOrDefault<string>(sql);
             }
 
