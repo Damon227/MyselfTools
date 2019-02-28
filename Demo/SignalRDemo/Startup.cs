@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using KC.Foundation;
+using KC.Foundation.Utilities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -43,6 +45,8 @@ namespace SignalRDemo
             // 注入SignalR
             
             services.AddSignalR();
+
+            services.AddSingleton(_ => new ObjectPool<Guid>(() => ID.NewSequentialGuid()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

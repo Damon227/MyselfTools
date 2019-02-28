@@ -84,5 +84,7 @@ namespace KC.Fengniaowu.Eos.ResourceStorage
         /// </summary>
         /// <param name="uri">资源完整路径。</param>
         Task DeleteResourceAsync(Uri uri);
+
+        Task DeleteDirectory1Async(string prefix);
     }
 }

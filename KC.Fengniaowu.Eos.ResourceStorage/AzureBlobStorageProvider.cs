@@ -376,6 +376,22 @@ namespace KC.Fengniaowu.Eos.ResourceStorage
             await blob.DeleteIfExistsAsync();
         }
 
+        public async Task DeleteDirectory1Async(string prefix)
+        {
+            CloudBlobDirectory dir = _blobContainer.GetDirectoryReference(prefix);
+            BlobResultSegment blobResult = await dir.ListBlobsSegmentedAsync(true, BlobListingDetails.All, null, null, null, null);
+
+            foreach (IListBlobItem item in blobResult.Results)
+            {
+                if (item.GetType() == typeof(CloudBlockBlob))
+                {
+                    CloudBlockBlob blob = (CloudBlockBlob)item;
+
+                    await blob.DeleteIfExistsAsync();
+                }
+            }
+        }
+
         #endregion
     }
 }

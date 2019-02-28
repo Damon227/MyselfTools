@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using Foundation.Tools;
+using KC.Foundation.Sys;
 
 namespace ConsoleApp1
 {
@@ -13,8 +14,20 @@ namespace ConsoleApp1
     {
         private static void Main(string[] args)
         {
+            TeacherTest.Test();
+
             //MagicLockTest test = new MagicLockTest();
             //test.StartTest();
+
+            //QueueTest.Peek();
+            //QueueTest.Peek();
+            //QueueTest.Peek();
+            //QueueTest.Peek();
+
+            //QueueTest.Dequeue();
+            //QueueTest.Dequeue();
+            //QueueTest.Dequeue();
+            //QueueTest.Dequeue();
 
             Console.ReadKey();
         }

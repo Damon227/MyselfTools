@@ -23,6 +23,6 @@ namespace SignalRDemo
     {
         public string Title { get; set; }
 
-        public DateTimeOffset Time { get; set; }
+        public DateTimeOffset? Time { get; set; }
     }
 }

@@ -38,14 +38,14 @@ namespace TaskConsole
                 {
                     Console.WriteLine(k);
                     // 在这里执行任务，Thread.Sleep 只是模拟任务需要的时间
-                    //Thread.Sleep(TimeSpan.FromSeconds(5));
+                    Thread.Sleep(TimeSpan.FromSeconds(5));
                     //for (int i = 0; i < 1000; i++)
                     //{
                     //    Console.WriteLine(k * 1000 + i);
                     //}
 
                     // 打印当前线程是否完成任务
-                    //Console.WriteLine(k.ToString() + Thread.CurrentThread.ManagedThreadId);
+                    Console.WriteLine(k + "," + Thread.CurrentThread.ManagedThreadId);
                 }).Start();
             }
 

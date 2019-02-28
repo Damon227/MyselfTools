@@ -180,6 +180,9 @@
     <EmbeddedResource Include="UnlockForm.resx">
       <DependentUpon>UnlockForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="appsettings.test.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

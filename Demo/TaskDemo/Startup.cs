@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using KC.Fengniaowu.Eos.ResourceStorage;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,6 +20,9 @@ namespace TaskDemo
 
             IServiceCollection services = new ServiceCollection();
             services.AddOptions();
+            services.Configure<ResourceStorageProviderOptions>(config.GetSection("Blob"));
+
+            services.AddSingleton<IResourceStorageProvider, AzureBlobStorageProvider>();
 
             IServiceProvider serviceProvider = services.BuildServiceProvider();
             return serviceProvider;
