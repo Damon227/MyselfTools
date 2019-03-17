@@ -104,7 +104,7 @@ namespace DamonHelper
             string tenancyType = txb_TenancyType.Text.Trim();
             string tenancyName = txb_TenancyName.Text.Trim();
             string companyName = txb_CompanyName.Text.Trim();
-            string cityName = cmb_CityName.SelectedValue.ToString();
+            string cityName = cmb_CityName.SelectedValue == null ? cmb_CityName.Text.Trim() : cmb_CityName.SelectedValue.ToString();
             string districtName = txb_DistrictName.Text.Trim();
             string cuscc = txb_Cuscc.Text.Trim();
             string accountName = txb_AccountName.Text.Trim();
@@ -252,7 +252,7 @@ namespace DamonHelper
                 string roleId2 = ID.NewSequentialGuid().ToGuidString();
                 string roleId3 = ID.NewSequentialGuid().ToGuidString();
                 string roleId4 = ID.NewSequentialGuid().ToGuidString();
-                List<string> roleIds = new List<string> { roleId1, roleId2, roleId3, roleId4 };
+                List<string> roleIds = new List<string> { "\"" + roleId1 + "\"", "\"" + roleId2 + "\"", "\"" + roleId3 + "\"", "\"" + roleId4 + "\"" };
                 string userId = ID.NewSequentialGuid().ToGuidString();
                 string loginInfoId = ID.NewSequentialGuid().ToGuidString();
                 string accountId = ID.NewSequentialGuid().ToGuidString();

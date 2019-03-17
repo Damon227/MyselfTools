@@ -16,21 +16,20 @@ namespace CQ.Foundation.Encryption
         /// </summary>
         private static readonly string s_defaultKey = "b0puqMzV";
 
-        /// <summary>
-        ///     DES加密算法
-        /// </summary>
-        /// <param name="encryptContent">需要加密的字符串</param>
+        /// <summary>
+        ///     DES加密算法。
+        /// </summary>
+        /// <param name="encryptContent">需要加密的字符串。</param>
         public static string DesEncrypt(string encryptContent)
         {
             return DesEncrypt(encryptContent, s_defaultKey);
         }
 
-        /// <summary>
-        ///     DES加密算法
-        ///     key为8位
-        /// </summary>
-        /// <param name="encryptContent">需要加密的字符串</param>
-        /// <param name="key">密钥</param>
+        /// <summary>
+        ///     DES加密算法，key为8位。
+        /// </summary>
+        /// <param name="encryptContent">需要加密的字符串。</param>
+        /// <param name="key">密钥。</param>
         public static string DesEncrypt(string encryptContent, string key)
         {
             if (string.IsNullOrEmpty(encryptContent) || string.IsNullOrWhiteSpace(encryptContent))
@@ -62,21 +61,20 @@ namespace CQ.Foundation.Encryption
             return ret.ToString();
         }
 
-        /// <summary>
-        ///     DES解密算法
-        /// </summary>
-        /// <param name="decryptContent">需要解密的字符串</param>
+        /// <summary>
+        ///     DES解密算法。
+        /// </summary>
+        /// <param name="decryptContent">需要解密的字符串。</param>
         public static string DesDecrypt(string decryptContent)
         {
             return DesDecrypt(decryptContent, s_defaultKey);
         }
 
-        /// <summary>
-        ///     DES解密算法
-        ///     key为8位
-        /// </summary>
-        /// <param name="decryptContent">需要解密的字符串</param>
-        /// <param name="key">密钥</param>
+        /// <summary>
+        ///     DES解密算法，key为8位。
+        /// </summary>
+        /// <param name="decryptContent">需要解密的字符串。</param>
+        /// <param name="key">密钥。</param>
         public static string DesDecrypt(string decryptContent, string key)
         {
             if (string.IsNullOrEmpty(decryptContent) || string.IsNullOrWhiteSpace(decryptContent))
