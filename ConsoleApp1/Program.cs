@@ -14,7 +14,9 @@ namespace ConsoleApp1
     {
         private static void Main(string[] args)
         {
-            TeacherTest.Test();
+            FileReadWriteTest.Work();
+
+            //TeacherTest.Test();
 
             //MagicLockTest test = new MagicLockTest();
             //test.StartTest();
