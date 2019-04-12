@@ -41,7 +41,7 @@ namespace IdentityDemo.Controllers
         ///     获取当前登录用户的信息
         /// </summary>
         [HttpGet, Route("getcurrentuser")]
-        [Authorize]
+        [Authorize("User")]
         public async Task<IActionResult> GetCurrentUser()
         {
             string userName = HttpContext.User.Identity.Name;

@@ -71,7 +71,8 @@ namespace IdentityDemo.Authentications
             Identity identity = new Identity
             {
                 UserId = sessionData.UserId,
-                UserName = sessionData.UserName
+                UserName = sessionData.UserName,
+                PermissionCodes = new List<string> { "User", "Admin" }
             };
 
             sessionData.Data["identity"] = JsonConvert.SerializeObject(identity);

@@ -4,8 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using IdentityDemo.Authentications;
+using IdentityDemo.Authorization;
 using IdentityDemo.Middlewares;
 using IdentityDemo.Swagger;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Internal;
@@ -36,12 +38,15 @@ namespace IdentityDemo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(options =>
-            {
-                options.AllowEmptyInputInBodyModelBinding = false;
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddAuthentication().AddSessionAuthentication();
+            services.AddSingleton<IAuthorizationHandler, PermissionRequirementHandler>();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("User", policy=>policy.Requirements.Add(new PermissionRequirement("User")));
+                options.AddPolicy("Admin", policy => policy.Requirements.Add(new PermissionRequirement("Admin")));
+            });
 
             services.AddSwaggerGen(options =>
             {

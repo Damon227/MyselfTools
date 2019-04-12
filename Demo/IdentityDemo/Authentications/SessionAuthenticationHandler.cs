@@ -52,7 +52,8 @@ namespace IdentityDemo.Authentications
 
                     Claim userIdClaim = new Claim(ClaimTypes.NameIdentifier, identity.UserId);
                     Claim userNameClaim = new Claim(ClaimTypes.Name, identity.UserName);
-                    IList<Claim> claims = new List<Claim> { userIdClaim, userNameClaim };
+                    Claim permissionClaim = new Claim("Permission", string.Join(',', identity.PermissionCodes));
+                    IList<Claim> claims = new List<Claim> { userIdClaim, userNameClaim, permissionClaim };
 
                     ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, Scheme.Name, ClaimTypes.Name, ClaimTypes.Role);
                     ClaimsPrincipal principal = new ClaimsPrincipal(claimsIdentity);
@@ -90,9 +91,19 @@ namespace IdentityDemo.Authentications
         /// <summary>Forbid behavior.</summary>
         /// <param name="properties">The <see cref="T:Microsoft.AspNetCore.Authentication.AuthenticationProperties" /> that contains the extra meta-data arriving with the authentication.</param>
         /// <returns>A task.</returns>
-        public Task ForbidAsync(AuthenticationProperties properties)
+        public async Task ForbidAsync(AuthenticationProperties properties)
         {
-            throw new NotImplementedException();
+            ApiResponse response = new ApiResponse
+            {
+                Succeeded = false,
+                Code = 403,
+                ExtraData = new Dictionary<string, object>(),
+                Message = string.Empty
+            };
+
+            HttpContext.Response.StatusCode = 401;
+            HttpContext.Response.ContentType = "application/json; charset=utf-8";
+            await HttpContext.Response.WriteAsync(JsonConvert.SerializeObject(response));
         }
 
         /// <summary>Signout behavior.</summary>
