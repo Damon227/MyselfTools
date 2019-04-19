@@ -42,6 +42,8 @@ namespace IdentityDemo
 
             services.AddAuthentication().AddSessionAuthentication();
             services.AddSingleton<IAuthorizationHandler, PermissionRequirementHandler>();
+
+            // See more at https://docs.microsoft.com/en-us/aspnet/core/security/authorization/introduction
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("User", policy=>policy.Requirements.Add(new PermissionRequirement("User")));

@@ -1,0 +1,14 @@
+﻿using Microsoft.Extensions.Options;
+
+namespace CQ.Dapper
+{
+    public class DapperOptions : IOptions<DapperOptions>
+    {
+        /// <summary>
+        ///     数据库连接字符串。
+        /// </summary>
+        public string ConnectionString { get; set; }
+
+        DapperOptions IOptions<DapperOptions>.Value => this;
+    }
+}
