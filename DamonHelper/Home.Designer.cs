@@ -36,8 +36,9 @@
             this.取消违约金ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.用户解锁ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.配置违约金ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.用户权限管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.公寓迁移ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,7 +60,8 @@
             this.取消违约金ToolStripMenuItem,
             this.用户解锁ToolStripMenuItem,
             this.配置违约金ToolStripMenuItem,
-            this.用户权限管理ToolStripMenuItem});
+            this.用户权限管理ToolStripMenuItem,
+            this.公寓迁移ToolStripMenuItem});
             this.蜂鸟屋ToolStripMenuItem.Name = "蜂鸟屋ToolStripMenuItem";
             this.蜂鸟屋ToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.蜂鸟屋ToolStripMenuItem.Text = "蜂鸟屋";
@@ -99,6 +101,13 @@
             this.配置违约金ToolStripMenuItem.Text = "配置违约金";
             this.配置违约金ToolStripMenuItem.Click += new System.EventHandler(this.配置违约金ToolStripMenuItem_Click);
             // 
+            // 用户权限管理ToolStripMenuItem
+            // 
+            this.用户权限管理ToolStripMenuItem.Name = "用户权限管理ToolStripMenuItem";
+            this.用户权限管理ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.用户权限管理ToolStripMenuItem.Text = "用户权限管理";
+            this.用户权限管理ToolStripMenuItem.Click += new System.EventHandler(this.用户权限管理ToolStripMenuItem_Click);
+            // 
             // panel1
             // 
             this.panel1.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -108,12 +117,12 @@
             this.panel1.TabIndex = 1;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // 用户权限管理ToolStripMenuItem
+            // 公寓迁移ToolStripMenuItem
             // 
-            this.用户权限管理ToolStripMenuItem.Name = "用户权限管理ToolStripMenuItem";
-            this.用户权限管理ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.用户权限管理ToolStripMenuItem.Text = "用户权限管理";
-            this.用户权限管理ToolStripMenuItem.Click += new System.EventHandler(this.用户权限管理ToolStripMenuItem_Click);
+            this.公寓迁移ToolStripMenuItem.Name = "公寓迁移ToolStripMenuItem";
+            this.公寓迁移ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.公寓迁移ToolStripMenuItem.Text = "公寓迁移";
+            this.公寓迁移ToolStripMenuItem.Click += new System.EventHandler(this.公寓迁移ToolStripMenuItem_Click);
             // 
             // Home
             // 
@@ -147,6 +156,7 @@
         private System.Windows.Forms.ToolStripMenuItem 用户解锁ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 配置违约金ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 用户权限管理ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 公寓迁移ToolStripMenuItem;
     }
 }
 

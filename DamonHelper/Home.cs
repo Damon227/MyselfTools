@@ -139,5 +139,22 @@ namespace DamonHelper
             panel1.Controls.Add(form);
             form.Show();
         }
+
+        private void 公寓迁移ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            panel1.Controls.Clear();
+
+            ApartmentMegrateForm form = new ApartmentMegrateForm
+            {
+                TopLevel = false,
+                FormBorderStyle = FormBorderStyle.None
+            };
+
+            form.Top = (panel1.Height - form.Height) / 2;
+            form.Left = (panel1.Width - form.Width) / 2;
+
+            panel1.Controls.Add(form);
+            form.Show();
+        }
     }
 }

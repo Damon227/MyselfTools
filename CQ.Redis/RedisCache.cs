@@ -25,7 +25,7 @@ namespace CQ.Redis
             _options = optionsAccessor?.Value ?? throw new ArgumentNullException(nameof(optionsAccessor));
             _logger = loggerFactory?.CreateLogger<RedisCache>() ?? throw new ArgumentNullException(nameof(loggerFactory));
 
-            if (string.IsNullOrEmpty(_options.InstanceName))
+            if (!string.IsNullOrEmpty(_options.InstanceName))
             {
                 _instance = _options.InstanceName;
 
@@ -75,6 +75,11 @@ namespace CQ.Redis
             await ConnectAsync();
 
             string result = await _database.StringGetAsync(_instance + key);
+
+            if (string.IsNullOrEmpty(result))
+            {
+                return default(TResult);
+            }
 
             // 延长缓存时间
             //await _database.StringSetAsync(_instance + key, result, GetRandomExpiryTime());
@@ -255,6 +260,11 @@ namespace CQ.Redis
             await ConnectAsync();
 
             RedisValue result = await _database.HashGetAsync(key, secondKey);
+
+            if (!result.HasValue)
+            {
+                return default(TResult);
+            }
 
             // 延长缓存时间
             //await _database.KeyExpireAsync(_instance + key, GetRandomExpiryTime());

@@ -14,7 +14,7 @@ namespace DamonHelper
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            if (!Config.InitConfig(Settings.Environment.Test.ToString())) //Production Development
+            if (!Config.InitConfig(Settings.Environment.Development.ToString())) //Production Development
             {
                 return;
             }

@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Exceptionless;
@@ -10,6 +11,7 @@ using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.AspNetCore.SignalR.Protocol;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 
 namespace SignalRClientDemo
 {
@@ -20,60 +22,60 @@ namespace SignalRClientDemo
 
         private static void Main(string[] args)
         {
-            List<Message> messages = new List<Message>
-            {
-                new Message
-                {
-                    MessageId = "1",
-                    Title = "title1",
-                    Content = "content1"
-                },
-                new Message
-                {
-                    MessageId = "1",
-                    Title = "title1",
-                    Content = "content1"
-                },
-                new Message
-                {
-                    MessageId = "2",
-                    Title = "title2",
-                    Content = "content2"
-                },
-                new Message
-                {
-                    MessageId = "3",
-                    Title = "title3",
-                    Content = "content3"
-                },
-                new Message
-                {
-                    MessageId = "3",
-                    Title = "title3",
-                    Content = "content1"
-                },
-                new Message
-                {
-                    MessageId = "3",
-                    Title = "title2",
-                    Content = "content1"
-                },
-                new Message
-                {
-                    MessageId = "4",
-                    Title = "title4",
-                    Content = "content1"
-                }
-            };
+            //List<Message> messages = new List<Message>
+            //{
+            //    new Message
+            //    {
+            //        MessageId = "1",
+            //        Title = "title1",
+            //        Content = "content1"
+            //    },
+            //    new Message
+            //    {
+            //        MessageId = "1",
+            //        Title = "title1",
+            //        Content = "content1"
+            //    },
+            //    new Message
+            //    {
+            //        MessageId = "2",
+            //        Title = "title2",
+            //        Content = "content2"
+            //    },
+            //    new Message
+            //    {
+            //        MessageId = "3",
+            //        Title = "title3",
+            //        Content = "content3"
+            //    },
+            //    new Message
+            //    {
+            //        MessageId = "3",
+            //        Title = "title3",
+            //        Content = "content1"
+            //    },
+            //    new Message
+            //    {
+            //        MessageId = "3",
+            //        Title = "title2",
+            //        Content = "content1"
+            //    },
+            //    new Message
+            //    {
+            //        MessageId = "4",
+            //        Title = "title4",
+            //        Content = "content1"
+            //    }
+            //};
 
-            _timer = new Timer(Test, null, TimeSpan.Zero, TimeSpan.FromMilliseconds(500));
+            //_timer = new Timer(Test, null, TimeSpan.Zero, TimeSpan.FromMilliseconds(500));
 
 
-            var list = messages.GroupBy(t => new { t.MessageId, t.Title }, t => t).ToList();
-            foreach (var grouping in list)
-            {
-                List<Message> temp = grouping.ToList();
-            }
+            //var list = messages.GroupBy(t => new { t.MessageId, t.Title }, t => t).ToList();
+            //foreach (var grouping in list)
+            //{
+            //    List<Message> temp = grouping.ToList();
+            //}
 
             //ExceptionlessClient.Default.Startup("zUot66NiE00DaDsXIa9QzpEikTcBayJO13ZRUQyH");
             //ExceptionlessClient.Default.Startup("MgPAWFFyzPfWFV91qIHJu4sXEuRIJWnHtx6FhPNq");
