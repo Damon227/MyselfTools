@@ -32,6 +32,8 @@ namespace IdentityDemo.Models
         [Required]
         public object ExtraData { get; set; }
 
+        public string StackTrace { get; set; }
+
         public static ApiResponse Success { get; } = new ApiResponse { Succeeded = true, Message = "成功", Code = 0 };
 
         public static ApiResponse BuildSuccessResponse(int code, string message, IDictionary<string, object> extraData = null)

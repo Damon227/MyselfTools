@@ -34,6 +34,8 @@
             this.txb_TenancyId = new System.Windows.Forms.TextBox();
             this.btn_Megrate = new System.Windows.Forms.Button();
             this.rtb_Output = new System.Windows.Forms.RichTextBox();
+            this.txb_Cellphone = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // rtb_ApartmentIds
@@ -66,12 +68,12 @@
             // 
             this.txb_TenancyId.Location = new System.Drawing.Point(344, 186);
             this.txb_TenancyId.Name = "txb_TenancyId";
-            this.txb_TenancyId.Size = new System.Drawing.Size(526, 20);
+            this.txb_TenancyId.Size = new System.Drawing.Size(287, 20);
             this.txb_TenancyId.TabIndex = 3;
             // 
             // btn_Megrate
             // 
-            this.btn_Megrate.Location = new System.Drawing.Point(795, 233);
+            this.btn_Megrate.Location = new System.Drawing.Point(795, 271);
             this.btn_Megrate.Name = "btn_Megrate";
             this.btn_Megrate.Size = new System.Drawing.Size(75, 23);
             this.btn_Megrate.TabIndex = 4;
@@ -81,20 +83,38 @@
             // 
             // rtb_Output
             // 
-            this.rtb_Output.Location = new System.Drawing.Point(344, 285);
+            this.rtb_Output.Location = new System.Drawing.Point(344, 321);
             this.rtb_Output.Name = "rtb_Output";
             this.rtb_Output.Size = new System.Drawing.Size(526, 323);
             this.rtb_Output.TabIndex = 5;
             this.rtb_Output.Text = "";
+            // 
+            // txb_Cellphone
+            // 
+            this.txb_Cellphone.Location = new System.Drawing.Point(344, 236);
+            this.txb_Cellphone.Name = "txb_Cellphone";
+            this.txb_Cellphone.Size = new System.Drawing.Size(287, 20);
+            this.txb_Cellphone.TabIndex = 6;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(254, 239);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(79, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "管理员手机号";
             // 
             // ApartmentMegrateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1144, 676);
+            this.Controls.Add(this.txb_Cellphone);
             this.Controls.Add(this.rtb_Output);
             this.Controls.Add(this.btn_Megrate);
             this.Controls.Add(this.txb_TenancyId);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lable1);
             this.Controls.Add(this.rtb_ApartmentIds);
@@ -113,5 +133,7 @@
         private System.Windows.Forms.TextBox txb_TenancyId;
         private System.Windows.Forms.Button btn_Megrate;
         private System.Windows.Forms.RichTextBox rtb_Output;
+        private System.Windows.Forms.TextBox txb_Cellphone;
+        private System.Windows.Forms.Label label2;
     }
 }

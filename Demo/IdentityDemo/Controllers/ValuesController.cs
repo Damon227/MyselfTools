@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CQ.Foundation.AspNetCore.Filters;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IdentityDemo.Controllers
@@ -12,6 +13,7 @@ namespace IdentityDemo.Controllers
     {
         // GET api/values
         [HttpGet]
+        [Unduplicate]
         public ActionResult<IEnumerable<string>> Get()
         {
             return new string[] { "value1", "value2" };
@@ -19,6 +21,7 @@ namespace IdentityDemo.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
+        [Unduplicate]
         public ActionResult<string> Get(int id)
         {
             return "value";
@@ -26,6 +29,7 @@ namespace IdentityDemo.Controllers
 
         // POST api/values
         [HttpPost]
+        [Unduplicate]
         public void Post([FromBody] string value)
         {
         }

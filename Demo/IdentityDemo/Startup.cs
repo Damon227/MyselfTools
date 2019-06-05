@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using CQ.Foundation.AspNetCore.Filters;
 using IdentityDemo.Authentications;
 using IdentityDemo.Authorization;
 using IdentityDemo.Middlewares;
@@ -86,6 +87,8 @@ namespace IdentityDemo
                 options.IncludeXmlComments(Path.Combine(HostingEnvironment.WebRootPath, HostingEnvironment.ApplicationName + ".xml"));
             });
 
+            services.AddUndulicate();
+            //services.AddUndulicateWithRedis(Configuration.GetSection("RedisOptions"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

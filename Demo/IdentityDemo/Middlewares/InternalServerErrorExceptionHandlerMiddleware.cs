@@ -54,19 +54,9 @@ namespace IdentityDemo.Middlewares
                     throw;
                 }
 
-
                 response.Code = 500;
                 response.Message = e.Message;
-
-
-                //if (!hostingEnvironment.IsProduction() || httpContext.Request.Query.ContainsKey("debug")
-                //                                       || httpContext.Request.Query.ContainsKey("Debug")
-                //                                       || httpContext.Request.Query.ContainsKey("stacktrace")
-                //                                       || httpContext.Request.Query.ContainsKey("stackTrace")
-                //                                       || httpContext.Request.Query.ContainsKey("StackTrace"))
-                //{
-                //    response.StackTrace = e.StackTrace;
-                //}
+                response.StackTrace = e.StackTrace;
 
                 httpContext.Response.Clear();
                 httpContext.Response.Headers["Access-Control-Allow-Credentials"] = new StringValues("true");
