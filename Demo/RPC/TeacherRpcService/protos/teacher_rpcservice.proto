@@ -1,0 +1,42 @@
+﻿syntax = "proto3";
+
+package teacherrpcservice;
+
+service TeacherRpcService{
+	/*
+		获取老师姓名，通过id来查询。
+		该方法是一个简单的RPC方法，方法内部处理完成后返回结果。
+	*/
+	rpc GetName(IdRequest) returns (Teacher){}
+
+	/*
+		获取老师列表
+		该方法是一个服务器流方式RPC方法，客户端发送请求到服务器，拿到一个流去读取返回的消息序列。 客户端读取返回的流，直到里面没有任何消息。
+	*/
+	rpc GetTeachers(EmptyRequest) returns (stream Teacher){}
+
+	/*
+		获取老师列表
+		该方法是一个客户端流方式RPC方法，客户端写入一个消息序列并将其发送到服务器，同样也是使用流。一旦客户端完成写入消息，它等待服务器完成读取返回它的响应。
+	*/
+	rpc GetTeachers2(stream IdRequest) returns (Teacher){}
+
+	/*
+		获取老师列表
+		该方法是一个双向流式RPC方法，两个流独立操作，因此客户端和服务器可以以任意喜欢的顺序读写：
+		比如， 服务器可以在写入响应前等待接收所有的客户端消息，或者可以交替的读取和写入消息，或者其他读写的组合。 每个流中的消息顺序被预留。
+	*/
+	rpc GetTeachers3(stream IdRequest) returns (stream Teacher){}
+}
+
+message EmptyRequest{}
+
+message IdRequest{
+	int32 id = 1;
+}
+
+message Teacher{
+	int32 id = 1;
+	string name = 2;
+	int32 age = 3;
+}

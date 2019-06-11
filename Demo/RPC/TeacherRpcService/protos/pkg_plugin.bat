@@ -1,0 +1,1 @@
+C:\Users\yuanchengman\.nuget\packages\grpc.tools\1.17.0\tools\windows_x64\protoc.exe -I=. --csharp_out=. --grpc_out=. --plugin=protoc-gen-grpc=C:\Users\yuanchengman\.nuget\packages\grpc.tools\1.17.0\tools\windows_x64\grpc_csharp_plugin.exe teacher_rpcservice.proto
