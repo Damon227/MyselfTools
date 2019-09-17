@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using CQ.Redis;
 using KC.Fengniaowu.Eos.ResourceStorage;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,6 +24,7 @@ namespace TaskDemo
             services.Configure<ResourceStorageProviderOptions>(config.GetSection("Blob"));
 
             services.AddSingleton<IResourceStorageProvider, AzureBlobStorageProvider>();
+            services.AddCQRedis(config.GetSection("RedisCache"));
 
             IServiceProvider serviceProvider = services.BuildServiceProvider();
             return serviceProvider;

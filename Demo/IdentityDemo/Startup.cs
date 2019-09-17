@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CQ.Foundation.AspNetCore.Filters;
 using IdentityDemo.Authentications;
 using IdentityDemo.Authorization;
+using IdentityDemo.Controllers;
 using IdentityDemo.Middlewares;
 using IdentityDemo.Swagger;
 using Microsoft.AspNetCore.Authorization;
@@ -89,6 +90,8 @@ namespace IdentityDemo
 
             services.AddUndulicate();
             //services.AddUndulicateWithRedis(Configuration.GetSection("RedisOptions"));
+
+            services.AddScoped<IManService, ManService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

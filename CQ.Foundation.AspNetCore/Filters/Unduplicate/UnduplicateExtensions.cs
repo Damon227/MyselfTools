@@ -34,7 +34,7 @@ namespace CQ.Foundation.AspNetCore.Filters
         /// </summary>
         public static void AddUndulicateWithRedis(this IServiceCollection service, IConfiguration redisConfig)
         {
-            service.AddScoped<IUnduplicateService, UndulicateRedisService>();
+            service.AddScoped<IUnduplicateService, UnduplicateRedisService>();
             service.Configure<UnduplicateOptions>(options => options.DuplicateInterval = 10);
             service.AddCQRedis(redisConfig);
         }
@@ -47,7 +47,7 @@ namespace CQ.Foundation.AspNetCore.Filters
         /// <param name="duplicateInterval">重复提交时间间隔，单位：秒。</param>
         public static void AddUndulicateWithRedis(this IServiceCollection service, IConfiguration redisConfig, int duplicateInterval)
         {
-            service.AddScoped<IUnduplicateService, UndulicateRedisService>();
+            service.AddScoped<IUnduplicateService, UnduplicateRedisService>();
             service.Configure<UnduplicateOptions>(options => options.DuplicateInterval = duplicateInterval);
             service.AddCQRedis(redisConfig);
         }

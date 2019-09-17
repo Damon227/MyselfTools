@@ -17,13 +17,10 @@ namespace CQ.Redis
         private readonly string _instance;
 
         private readonly RedisCacheOptions _options;
-        private readonly ILogger _logger;
 
-        public RedisCache(IOptions<RedisCacheOptions> optionsAccessor,
-            ILoggerFactory loggerFactory)
+        public RedisCache(IOptions<RedisCacheOptions> optionsAccessor)
         {
             _options = optionsAccessor?.Value ?? throw new ArgumentNullException(nameof(optionsAccessor));
-            _logger = loggerFactory?.CreateLogger<RedisCache>() ?? throw new ArgumentNullException(nameof(loggerFactory));
 
             if (!string.IsNullOrEmpty(_options.InstanceName))
             {
@@ -388,14 +385,67 @@ namespace CQ.Redis
         ///     把Redis缓存中的键值锁住。
         /// </summary>
         /// <param name="key">缓存键</param>
-        public async Task LockQueryAsync(string key)
+        public Task<RedisValue> LockQueryAsync(string key)
         {
             if (IsMock())
             {
-                return;
+                return Task.FromResult(RedisValue.Null);
             }
 
-            await _database.LockQueryAsync(_instance + key);
+            return _database.LockQueryAsync(_instance + key);
+        }
+
+        public RedisValue LockQuery(string key)
+        {
+            if (IsMock())
+            {
+                return RedisValue.Null;
+            }
+
+            return _database.LockQuery(_instance + key);
+        }
+
+        public async Task<bool> LockTakeAsync(string key, string value, TimeSpan? expiry)
+        {
+            if (IsMock())
+            {
+                return await Task.FromResult(true);
+            }
+
+            if (expiry == null)
+            {
+                expiry = TimeSpan.FromSeconds(10);
+            }
+
+            await ConnectAsync();
+
+            bool flag;
+
+            try
+            {
+                flag = _database.StringSet(key, value, expiry, When.NotExists);
+            }
+            catch (Exception e)
+            {
+                flag = true;
+            }
+
+            return flag;
+        }
+
+        public bool LockTake(string key, RedisValue value, TimeSpan? expiry)
+        {
+            if (IsMock())
+            {
+                return true;
+            }
+
+            if (expiry == null)
+            {
+                expiry = TimeSpan.FromSeconds(10);
+            }
+
+            return _database.LockTake(_instance + key, value, expiry.Value);
         }
 
         /// <summary>
@@ -403,14 +453,49 @@ namespace CQ.Redis
         /// </summary>
         /// <param name="key">缓存键</param>
         /// <param name="value">缓存值，如果该值与Redis中的值不一致，则锁释放失败</param>
-        public async Task<bool> LockReleaseAsync(string key, object value)
+        public async Task<bool> LockReleaseAsync(string key, string value)
+        {
+            if (IsMock())
+            {
+                return await Task.FromResult(true);
+            }
+
+            string lua_script = @"
+
+if (redis.call('GET', KEYS[1]) == ARGV[1]) then
+
+redis.call('DEL', KEYS[1])
+
+return true
+
+else
+
+return false
+
+end
+
+";
+            try
+            {
+                await ConnectAsync();
+                RedisResult result = await _database.ScriptEvaluateAsync(lua_script, new RedisKey[] { key }, new RedisValue[] { value });
+                return (bool)result;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+           
+        }
+
+        public bool LockRelease(string key, RedisValue value)
         {
             if (IsMock())
             {
                 return true;
             }
 
-            return await _database.LockReleaseAsync(_instance + key, JsonConvert.SerializeObject(value));
+            return _database.LockRelease(_instance + key, value);
         }
 
         private async Task ConnectAsync()

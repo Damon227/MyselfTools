@@ -11,11 +11,38 @@ namespace IdentityDemo.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private readonly IUnduplicateService _unduplicateService;
+        private readonly IManService _personService;
+
+        private static List<IUnduplicateService> Service;
+
+        public ValuesController(IUnduplicateService unduplicateService, IManService personService)
+        {
+            _unduplicateService = unduplicateService;
+            _personService = personService;
+
+            if (Service == null)
+            {
+                Service = new List<IUnduplicateService>();
+            }
+        }
+
         // GET api/values
         [HttpGet]
-        [Unduplicate]
+        //[Unduplicate]
         public ActionResult<IEnumerable<string>> Get()
         {
+            //Service.Add(_unduplicateService);
+
+            //if (Service.Count > 1)
+            //{
+            //    string[] a = { (Service[0].Equals(Service[1])).ToString() };
+            //    Service.RemoveAt(0);
+
+            //    return a;
+            //}
+
+            _personService.GetName();
             return new string[] { "value1", "value2" };
         }
 
@@ -44,6 +71,21 @@ namespace IdentityDemo.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+    }
+
+    public interface IPersonService
+    {
+        void GetName();
+    }
+
+    public interface IManService : IPersonService { }
+
+    public class ManService : IManService
+    {
+        public void GetName()
+        {
+            Console.WriteLine("James");
         }
     }
 }

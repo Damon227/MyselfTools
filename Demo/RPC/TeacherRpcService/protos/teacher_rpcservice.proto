@@ -1,4 +1,6 @@
-﻿syntax = "proto3";
+﻿// 运行 pkg_plugin.bat 可以生成类文件，供GRPC服务端和调用端使用。
+
+syntax = "proto3";
 
 package teacherrpcservice;
 

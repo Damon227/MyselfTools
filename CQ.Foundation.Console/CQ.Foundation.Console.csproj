@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CQ.Foundation" Version="1.2.0" />
+    <ProjectReference Include="..\CQ.Foundation\CQ.Foundation.csproj" />
   </ItemGroup>
 
 </Project>

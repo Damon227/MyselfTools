@@ -7,12 +7,12 @@ using Microsoft.Extensions.Options;
 
 namespace CQ.Foundation.AspNetCore.Filters
 {
-    public class UndulicateRedisService : IUnduplicateService
+    public class UnduplicateRedisService : IUnduplicateService
     {
         private readonly IRedisCache _redisCache;
         private readonly UnduplicateOptions _options;
 
-        public UndulicateRedisService(IRedisCache redisCache, IOptions<UnduplicateOptions> optionsAccessor)
+        public UnduplicateRedisService(IRedisCache redisCache, IOptions<UnduplicateOptions> optionsAccessor)
         {
             _redisCache = redisCache ?? throw new ArgumentNullException(nameof(redisCache));
             _options = optionsAccessor?.Value ?? throw new ArgumentNullException(nameof(optionsAccessor));
@@ -23,7 +23,7 @@ namespace CQ.Foundation.AspNetCore.Filters
             string time = await _redisCache.GetAsync<string>(code.ToString());
             if (string.IsNullOrEmpty(time))
             {
-                await _redisCache.SetAsync(code.ToString(), "Undulicate", TimeSpan.FromSeconds(_options.DuplicateInterval));
+                await _redisCache.SetAsync(code.ToString(), "Unduplicate", TimeSpan.FromSeconds(_options.DuplicateInterval));
                 return false;
             }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using StackExchange.Redis;
 
 namespace CQ.Redis
 {
@@ -128,13 +129,42 @@ namespace CQ.Redis
         ///     把Redis缓存中的键值锁住。
         /// </summary>
         /// <param name="key">缓存键</param>
-        Task LockQueryAsync(string key);
+        Task<RedisValue> LockQueryAsync(string key);
+
+        /// <summary>
+        ///     把Redis缓存中的键值锁住。
+        /// </summary>
+        /// <param name="key">缓存键</param>
+        RedisValue LockQuery(string key);
+
+        /// <summary>
+        ///     给指定键和值加锁。
+        /// </summary>
+        /// <param name="key">键</param>
+        /// <param name="value">值</param>
+        /// <param name="expiry">锁过期时间</param>
+        Task<bool> LockTakeAsync(string key, string value, TimeSpan? expiry);
+
+        /// <summary>
+        ///     给指定键和值加锁。
+        /// </summary>
+        /// <param name="key">键</param>
+        /// <param name="value">值</param>
+        /// <param name="expiry">锁过期时间</param>
+        bool LockTake(string key, RedisValue value, TimeSpan? expiry);
 
         /// <summary>
         ///     释放Redis缓存中相应键的锁。
         /// </summary>
         /// <param name="key">缓存键</param>
         /// <param name="value">缓存值，如果该值与Redis中的值不一致，则锁释放失败</param>
-        Task<bool> LockReleaseAsync(string key, object value);
+        Task<bool> LockReleaseAsync(string key, string value);
+
+        /// <summary>
+        ///     释放Redis缓存中相应键的锁。
+        /// </summary>
+        /// <param name="key">缓存键</param>
+        /// <param name="value">缓存值，如果该值与Redis中的值不一致，则锁释放失败</param>
+        bool LockRelease(string key, RedisValue value);
     }
 }

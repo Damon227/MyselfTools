@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using CQ.Redis;
 using KC.Fengniaowu.Eos.ResourceStorage;
 using Microsoft.Extensions.DependencyInjection;
+using StackExchange.Redis;
 
 namespace TaskDemo
 {
     internal class Program
     {
+        static IServiceProvider _provider = Startup.ConfigureServices();
+
         private static readonly Dictionary<string, string> s_cache = new Dictionary<string, string>();
 
         private static readonly List<string> s_accountIds = new List<string>
@@ -35,12 +39,13 @@ namespace TaskDemo
             //List<FileInfo> r1 = await storage.GetResourcesAsync("t1");
             //await storage.DeleteDirectory1Async("t1");
 
-            for (int i = 0; i < 10000; i++)
-            {
-                SqlTest(i).Wait();
-            }
+            //for (int i = 0; i < 10000; i++)
+            //{
+            //    SqlTest(i).Wait();
+            //}
 
-            
+            CQRedisTest().Wait();
+
             Console.ReadLine();
         }
 
@@ -75,6 +80,17 @@ namespace TaskDemo
 
             HttpResponseMessage response = await httpClient.PostAsJsonAsync("api/Message/SendStationMessage", content);
             Console.WriteLine($"{i},接口调用结果：{response.StatusCode}，时间：{DateTimeOffset.Now:yyyy-MM-dd HH:mm:ss}");
+        }
+
+        private static async Task CQRedisTest()
+        {
+            string key = "key";
+            string token = "token";
+            IRedisCache redisCache = _provider.GetRequiredService<IRedisCache>();
+            //await redisCache.SetAsync(key, token);
+            bool take = await redisCache.LockTakeAsync(key, token, TimeSpan.FromSeconds(500));
+            bool take2 = await redisCache.LockTakeAsync(key, token, TimeSpan.FromSeconds(500));
+            await redisCache.LockReleaseAsync(key, token);
         }
     }
 }
