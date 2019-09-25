@@ -151,7 +151,7 @@ namespace CQ.Redis
         /// <param name="key">键</param>
         /// <param name="value">值</param>
         /// <param name="expiry">锁过期时间</param>
-        bool LockTake(string key, RedisValue value, TimeSpan? expiry);
+        bool LockTake(string key, string value, TimeSpan? expiry);
 
         /// <summary>
         ///     释放Redis缓存中相应键的锁。
@@ -165,6 +165,6 @@ namespace CQ.Redis
         /// </summary>
         /// <param name="key">缓存键</param>
         /// <param name="value">缓存值，如果该值与Redis中的值不一致，则锁释放失败</param>
-        bool LockRelease(string key, RedisValue value);
+        bool LockRelease(string key, string value);
     }
 }

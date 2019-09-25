@@ -18,10 +18,9 @@ namespace ExceptionlessDemo.Controllers
         {
             ExceptionlessClient client = new ExceptionlessClient(c =>
             {
-                c.ApiKey = "MgPAWFFyzPfWFV91qIHJu4sXEuRIJWnHtx6FhPNq";
-                c.ServerUrl = "http://localhost:8008/";
+                c.ApiKey = "2WtCifdZ2wtEpQ6LrpuQsgNa4afpNWT7B3NoQjXB";
+                c.ServerUrl = "http://localhost:50000/";
             });
-
 
             client.SubmitLog("测试Exceptionless");
 

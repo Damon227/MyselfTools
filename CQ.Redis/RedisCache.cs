@@ -12,21 +12,21 @@ namespace CQ.Redis
 {
     public class RedisCache : IRedisCache
     {
-        private ConnectionMultiplexer _connection;
+        //private ConnectionMultiplexer _connection;
         private IDatabase _database;
         private readonly string _instance;
 
-        private readonly RedisCacheOptions _options;
+        private static RedisCacheOptions s_options;
 
         public RedisCache(IOptions<RedisCacheOptions> optionsAccessor)
         {
-            _options = optionsAccessor?.Value ?? throw new ArgumentNullException(nameof(optionsAccessor));
+            s_options = optionsAccessor?.Value ?? throw new ArgumentNullException(nameof(optionsAccessor));
 
-            if (!string.IsNullOrEmpty(_options.InstanceName))
+            if (!string.IsNullOrEmpty(s_options.InstanceName))
             {
-                _instance = _options.InstanceName;
+                _instance = s_options.InstanceName;
 
-                if (!_options.InstanceName.Substring(_options.InstanceName.Length - 1, 1).Equals(":"))
+                if (!s_options.InstanceName.Substring(s_options.InstanceName.Length - 1, 1).Equals(":"))
                 {
                     _instance += ":";
                 }
@@ -385,14 +385,16 @@ namespace CQ.Redis
         ///     把Redis缓存中的键值锁住。
         /// </summary>
         /// <param name="key">缓存键</param>
-        public Task<RedisValue> LockQueryAsync(string key)
+        public async Task<RedisValue> LockQueryAsync(string key)
         {
             if (IsMock())
             {
-                return Task.FromResult(RedisValue.Null);
+                return await Task.FromResult(RedisValue.Null);
             }
 
-            return _database.LockQueryAsync(_instance + key);
+            await ConnectAsync();
+
+            return await _database.LockQueryAsync(_instance + key);
         }
 
         public RedisValue LockQuery(string key)
@@ -401,6 +403,8 @@ namespace CQ.Redis
             {
                 return RedisValue.Null;
             }
+
+            Connect();
 
             return _database.LockQuery(_instance + key);
         }
@@ -423,7 +427,7 @@ namespace CQ.Redis
 
             try
             {
-                flag = _database.StringSet(key, value, expiry, When.NotExists);
+                flag = await _database.StringSetAsync(_instance + key, value, expiry, When.NotExists);
             }
             catch (Exception e)
             {
@@ -433,7 +437,7 @@ namespace CQ.Redis
             return flag;
         }
 
-        public bool LockTake(string key, RedisValue value, TimeSpan? expiry)
+        public bool LockTake(string key, string value, TimeSpan? expiry)
         {
             if (IsMock())
             {
@@ -445,7 +449,20 @@ namespace CQ.Redis
                 expiry = TimeSpan.FromSeconds(10);
             }
 
-            return _database.LockTake(_instance + key, value, expiry.Value);
+            Connect();
+
+            bool flag;
+
+            try
+            {
+                flag = _database.StringSet(_instance + key, value, expiry, When.NotExists);
+            }
+            catch (Exception e)
+            {
+                flag = true;
+            }
+
+            return flag;
         }
 
         /// <summary>
@@ -478,46 +495,82 @@ end
             try
             {
                 await ConnectAsync();
-                RedisResult result = await _database.ScriptEvaluateAsync(lua_script, new RedisKey[] { key }, new RedisValue[] { value });
+                RedisResult result = await _database.ScriptEvaluateAsync(lua_script, new RedisKey[] { _instance + key }, new RedisValue[] { value });
                 return (bool)result;
             }
             catch (Exception e)
             {
                 return false;
             }
-           
         }
 
-        public bool LockRelease(string key, RedisValue value)
+        public bool LockRelease(string key, string value)
         {
             if (IsMock())
             {
                 return true;
             }
 
-            return _database.LockRelease(_instance + key, value);
+            string lua_script = @"
+
+if (redis.call('GET', KEYS[1]) == ARGV[1]) then
+
+redis.call('DEL', KEYS[1])
+
+return true
+
+else
+
+return false
+
+end
+
+";
+            try
+            {
+                Connect();
+                RedisResult result = _database.ScriptEvaluate(lua_script, new RedisKey[] { _instance + key }, new RedisValue[] { value });
+                return (bool)result;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
+
+        private static Lazy<ConnectionMultiplexer> s_lazyConnection = new Lazy<ConnectionMultiplexer>(() => ConnectionMultiplexer.Connect(s_options.ConfigurationString));
 
         private async Task ConnectAsync()
         {
             // Redis 连接字符串中，设置abortConnect=false可以自动重连
-            if (_connection == null || !_connection.IsConnected)
-            {
-                _connection = await ConnectionMultiplexer.ConnectAsync(_options.ConfigurationString);
-                _database = _connection.GetDatabase(_options.Database);
-            }
+            //if (_connection == null || !_connection.IsConnected)
+            //{
+            //    _connection = await ConnectionMultiplexer.ConnectAsync(s_options.ConfigurationString);
+            //    _database = s_lazyConnection.Value.GetDatabase(s_options.Database);
+            //}
+            _database = s_lazyConnection.Value.GetDatabase(s_options.Database);
         }
 
-        private bool IsMock()
+        private void Connect()
         {
-            return !_options.Enable;
+            // Redis 连接字符串中，设置abortConnect=false可以自动重连
+            //if (_connection == null || !_connection.IsConnected)
+            //{
+            //    _connection = ConnectionMultiplexer.Connect(s_options.ConfigurationString);
+            //    _database = s_lazyConnection.Value.GetDatabase(s_options.Database);
+            //}
+            _database = s_lazyConnection.Value.GetDatabase(s_options.Database);
+        }
+
+        private static bool IsMock()
+        {
+            return !s_options.Enable;
         }
 
         /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
         public void Dispose()
         {
-            _connection?.Close();
-            _connection?.Dispose();
+            s_lazyConnection.Value.Dispose();
         }
 
         /// <summary>

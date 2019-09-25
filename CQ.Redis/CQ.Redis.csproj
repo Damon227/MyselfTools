@@ -8,7 +8,7 @@
     <Company>CQ</Company>
     <Product>CQ</Product>
     <Description>封装StackExchange.Redis的类库，增加了Mock机制、缓存随机过期时间机制（防止缓存雪崩）。</Description>
-    <Version>1.0.4</Version>
+    <Version>1.0.6</Version>
   </PropertyGroup>
 
   <ItemGroup>

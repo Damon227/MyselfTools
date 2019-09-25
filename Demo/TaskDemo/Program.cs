@@ -87,7 +87,8 @@ namespace TaskDemo
             string key = "key";
             string token = "token";
             IRedisCache redisCache = _provider.GetRequiredService<IRedisCache>();
-            //await redisCache.SetAsync(key, token);
+            await redisCache.SetAsync(key, token);
+            string r = await redisCache.GetAsync<string>(key);
             bool take = await redisCache.LockTakeAsync(key, token, TimeSpan.FromSeconds(500));
             bool take2 = await redisCache.LockTakeAsync(key, token, TimeSpan.FromSeconds(500));
             await redisCache.LockReleaseAsync(key, token);
