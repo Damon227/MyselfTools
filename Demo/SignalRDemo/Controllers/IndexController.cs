@@ -14,17 +14,19 @@ namespace SignalRDemo.Controllers
     public class IndexController : Controller
     {
         private ObjectPool<Guid> _pool;
+        private readonly IHubContext<MessageHub> _hubContext;
 
-        public IndexController(ObjectPool<Guid> pool)
+        public IndexController(ObjectPool<Guid> pool, IHubContext<MessageHub> hubContext)
         {
             _pool = pool;
+            _hubContext = hubContext;
         }
 
         [HttpPost("sendmessage/{user}/{message}")]
         public async Task SendMessage(string user, string message)
         {
+            await _hubContext.Clients.All.SendAsync("dododo", message);
 
-           
         }
 
         [HttpGet("test")]

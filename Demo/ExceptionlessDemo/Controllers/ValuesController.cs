@@ -18,44 +18,44 @@ namespace ExceptionlessDemo.Controllers
         {
             ExceptionlessClient client = new ExceptionlessClient(c =>
             {
-                c.ApiKey = "2WtCifdZ2wtEpQ6LrpuQsgNa4afpNWT7B3NoQjXB";
-                c.ServerUrl = "http://localhost:50000/";
+                c.ApiKey = "KU7iGcLAMZWMOT69SUZuqtWwwaUZ8RlndbQUKyo8";
+                c.ServerUrl = "http://139.219.140.7:8001/";
             });
 
             client.SubmitLog("测试Exceptionless");
 
-            client.SubmitLog("测试Exceptionless", LogLevel.Info);
-            client.SubmitLog("测试Exceptionless", LogLevel.Trace);
-            client.SubmitLog("测试Exceptionless", LogLevel.Warn);
-            client.SubmitLog("测试Exceptionless", LogLevel.Error);
+            //client.SubmitLog("测试Exceptionless", LogLevel.Info);
+            //client.SubmitLog("测试Exceptionless", LogLevel.Trace);
+            //client.SubmitLog("测试Exceptionless", LogLevel.Warn);
+            //client.SubmitLog("测试Exceptionless", LogLevel.Error);
 
-            client.SubmitLog(typeof(ValuesController).FullName, "测试Exceptionless", LogLevel.Error);
+            //client.SubmitLog(typeof(ValuesController).FullName, "测试Exceptionless", LogLevel.Error);
 
-            client.SubmitFeatureUsage("MyFeature");
-            client.CreateFeatureUsage("MyFeature")
-                .AddTags("ExceptionlessTag", "Demo")
-                .Submit();
-            var user = new { Name = "Damon"};
-            client.CreateFeatureUsage("MyFeature")
-                .AddTags("ExceptionlessTag", "Demo")
-                .AddObject(user, "UserInfo")//  添加一个对象信息
-                .SetProperty("Cellphone", "13100000000")//  设置手机号
-                .SetReferenceId(Guid.NewGuid().ToString("N"))// 为事件设定一个编号，以便于你搜索 
-                .MarkAsCritical()// 标记为关键异常
-                .SetGeo(43, 44)// 设置地理位置坐标
-                .SetUserIdentity("userId", "userName")// 设置触发异常的用户信息
-                .SetUserDescription("emailAddress", "")// 设置触发用户的一些描述
-                .Submit();
+            //client.SubmitFeatureUsage("MyFeature");
+            //client.CreateFeatureUsage("MyFeature")
+            //    .AddTags("ExceptionlessTag", "Demo")
+            //    .Submit();
+            //var user = new { Name = "Damon"};
+            //client.CreateFeatureUsage("MyFeature")
+            //    .AddTags("ExceptionlessTag", "Demo")
+            //    .AddObject(user, "UserInfo")//  添加一个对象信息
+            //    .SetProperty("Cellphone", "13100000000")//  设置手机号
+            //    .SetReferenceId(Guid.NewGuid().ToString("N"))// 为事件设定一个编号，以便于你搜索 
+            //    .MarkAsCritical()// 标记为关键异常
+            //    .SetGeo(43, 44)// 设置地理位置坐标
+            //    .SetUserIdentity("userId", "userName")// 设置触发异常的用户信息
+            //    .SetUserDescription("emailAddress", "")// 设置触发用户的一些描述
+            //    .Submit();
 
-            try
-            {
-                string s = null;
-                string s1 = s.ToString();
-            }
-            catch (Exception e)
-            {
-                client.SubmitException(e);
-            }
+            //try
+            //{
+            //    string s = null;
+            //    string s1 = s.ToString();
+            //}
+            //catch (Exception e)
+            //{
+            //    client.SubmitException(e);
+            //}
 
             return true;
         }

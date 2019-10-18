@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2036
+VisualStudioVersion = 15.0.28307.852
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4C0EFB77-3BEB-4B8A-9C4A-0D8D6F9ED134}"
 	ProjectSection(SolutionItems) = preProject
@@ -73,9 +73,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeacherRpcService", "Demo\R
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RpcServer", "Demo\RPC\RpcServer\RpcServer.csproj", "{30CCFB12-42E0-422F-A514-572E5ABB2202}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RpcClient", "Demo\RPC\RpcClient\RpcClient.csproj", "{03C749E5-DAC7-47E3-9C65-3BD388966D52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RpcClient", "Demo\RPC\RpcClient\RpcClient.csproj", "{03C749E5-DAC7-47E3-9C65-3BD388966D52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RpcServer2", "Demo\RPC\RpcServer2\RpcServer2.csproj", "{E530AB4A-244F-43C4-8589-C4029CB49E8D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RpcServer2", "Demo\RPC\RpcServer2\RpcServer2.csproj", "{E530AB4A-244F-43C4-8589-C4029CB49E8D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRServer2", "Demo\SignalRServer2\SignalRServer2.csproj", "{57D5B944-C037-416C-A2F3-C37E59BFFA1C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -323,6 +325,14 @@ Global
 		{E530AB4A-244F-43C4-8589-C4029CB49E8D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E530AB4A-244F-43C4-8589-C4029CB49E8D}.Release|x64.ActiveCfg = Release|Any CPU
 		{E530AB4A-244F-43C4-8589-C4029CB49E8D}.Release|x64.Build.0 = Release|Any CPU
+		{57D5B944-C037-416C-A2F3-C37E59BFFA1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57D5B944-C037-416C-A2F3-C37E59BFFA1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57D5B944-C037-416C-A2F3-C37E59BFFA1C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{57D5B944-C037-416C-A2F3-C37E59BFFA1C}.Debug|x64.Build.0 = Debug|Any CPU
+		{57D5B944-C037-416C-A2F3-C37E59BFFA1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57D5B944-C037-416C-A2F3-C37E59BFFA1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57D5B944-C037-416C-A2F3-C37E59BFFA1C}.Release|x64.ActiveCfg = Release|Any CPU
+		{57D5B944-C037-416C-A2F3-C37E59BFFA1C}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -349,6 +359,7 @@ Global
 		{30CCFB12-42E0-422F-A514-572E5ABB2202} = {FF92B0AE-D58E-4202-B029-CDD4F794BCCB}
 		{03C749E5-DAC7-47E3-9C65-3BD388966D52} = {FF92B0AE-D58E-4202-B029-CDD4F794BCCB}
 		{E530AB4A-244F-43C4-8589-C4029CB49E8D} = {FF92B0AE-D58E-4202-B029-CDD4F794BCCB}
+		{57D5B944-C037-416C-A2F3-C37E59BFFA1C} = {3B03A251-B5A8-4207-B152-005CDA594FBE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FE51C28F-F56C-478A-AAFB-7FC42E56516D}

@@ -570,7 +570,7 @@ end
         /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
         public void Dispose()
         {
-            s_lazyConnection.Value.Dispose();
+            //s_lazyConnection.Value.Dispose();
         }
 
         /// <summary>
